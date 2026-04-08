@@ -10,6 +10,19 @@ app.secret_key = "village-hire-secret-key"
 DB_FILE = "db.json"
 DEFAULT_LANG = "en"
 
+# Map category keys to PNG files in static/images/
+# Categories not in this dict fall back to SVG icons.
+CATEGORY_IMAGES = {
+    "electrician": "electrician.png",
+    "labor":       "labor.png",
+    "painter":     "painter.png",
+    "carpentry":   "lumber.png",
+    "mason":       "manson.png",
+    "plumber":     "plumber.png",
+    "tailor":      "tailor.png",
+    "driver":      "driver.png",
+}
+
 
 def load_db():
     """Load the JSON database."""
@@ -39,6 +52,7 @@ def inject_translations():
         "t": TRANSLATIONS[lang],
         "lang": lang,
         "languages": LANGUAGES,
+        "category_images": CATEGORY_IMAGES,
     }
 
 

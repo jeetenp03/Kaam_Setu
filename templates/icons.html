@@ -4,6 +4,15 @@
    non-readers can identify the category.
    ═══════════════════════════════════════════════ #}
 
+{# Render the category visual: PNG photo if available, otherwise SVG fallback #}
+{% macro category_visual(category, category_images, svg_macros) %}
+    {% if category in category_images %}
+        <img src="/static/images/{{ category_images[category] }}" alt="{{ category }}">
+    {% else %}
+        {{ svg_macros[category]() }}
+    {% endif %}
+{% endmacro %}
+
 {% macro app_logo() %}
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
   <!-- Sun behind village -->

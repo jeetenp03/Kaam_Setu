@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon %}
+{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon, category_visual %}
 
-{% set icon_dispatch = {
+{% set svg_macros = {
     'electrician': electrician_icon,
     'labor': labor_icon,
     'painter': painter_icon,
@@ -20,9 +20,7 @@
 <div class="form-container">
     <div class="form-header">
         <div class="form-icon-wrap">
-            {% if category in icon_dispatch %}
-                {{ icon_dispatch[category]() }}
-            {% endif %}
+            {{ category_visual(category, category_images, svg_macros) }}
         </div>
         <h2>{{ t[category] if category in t else category }}</h2>
         <div class="form-subtitle">

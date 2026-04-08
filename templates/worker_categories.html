@@ -1,61 +1,37 @@
 {% extends "base.html" %}
-{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon %}
+{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon, category_visual %}
+
+{% set svg_macros = {
+    'electrician': electrician_icon,
+    'labor': labor_icon,
+    'painter': painter_icon,
+    'carpentry': carpentry_icon,
+    'plumber': plumber_icon,
+    'mason': mason_icon,
+    'tailor': tailor_icon,
+    'driver': driver_icon,
+    'cook': cook_icon,
+    'farming': farming_icon
+} %}
+
+{% set categories = ['electrician', 'labor', 'painter', 'carpentry', 'plumber', 'mason', 'tailor', 'driver', 'cook', 'farming'] %}
 
 {% block content %}
-<a href="{{ url_for('home') }}" class="back-btn">&#x2190; {{ t.back }}</a>
-<div class="page-title">{{ t.choose_work }}</div>
+<section class="dark-page">
+    <div class="page-header">
+        <a href="{{ url_for('home') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+        <h1 class="page-title">{{ t.choose_work }}</h1>
+    </div>
 
-<div class="category-grid">
-
-    <a href="{{ url_for('register', role='worker', category='electrician') }}" class="cat-tile" data-cat="electrician">
-        <div class="cat-icon-wrap">{{ electrician_icon() }}</div>
-        <div class="cat-label-en">{{ t.electrician }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='labor') }}" class="cat-tile" data-cat="labor">
-        <div class="cat-icon-wrap">{{ labor_icon() }}</div>
-        <div class="cat-label-en">{{ t.labor }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='painter') }}" class="cat-tile" data-cat="painter">
-        <div class="cat-icon-wrap">{{ painter_icon() }}</div>
-        <div class="cat-label-en">{{ t.painter }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='carpentry') }}" class="cat-tile" data-cat="carpentry">
-        <div class="cat-icon-wrap">{{ carpentry_icon() }}</div>
-        <div class="cat-label-en">{{ t.carpentry }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='plumber') }}" class="cat-tile" data-cat="plumber">
-        <div class="cat-icon-wrap">{{ plumber_icon() }}</div>
-        <div class="cat-label-en">{{ t.plumber }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='mason') }}" class="cat-tile" data-cat="mason">
-        <div class="cat-icon-wrap">{{ mason_icon() }}</div>
-        <div class="cat-label-en">{{ t.mason }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='tailor') }}" class="cat-tile" data-cat="tailor">
-        <div class="cat-icon-wrap">{{ tailor_icon() }}</div>
-        <div class="cat-label-en">{{ t.tailor }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='driver') }}" class="cat-tile" data-cat="driver">
-        <div class="cat-icon-wrap">{{ driver_icon() }}</div>
-        <div class="cat-label-en">{{ t.driver }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='cook') }}" class="cat-tile" data-cat="cook">
-        <div class="cat-icon-wrap">{{ cook_icon() }}</div>
-        <div class="cat-label-en">{{ t.cook }}</div>
-    </a>
-
-    <a href="{{ url_for('register', role='worker', category='farming') }}" class="cat-tile" data-cat="farming">
-        <div class="cat-icon-wrap">{{ farming_icon() }}</div>
-        <div class="cat-label-en">{{ t.farming }}</div>
-    </a>
-
-</div>
+    <div class="category-grid">
+        {% for cat in categories %}
+        <a href="{{ url_for('register', role='worker', category=cat) }}" class="cat-tile" data-cat="{{ cat }}">
+            <div class="cat-icon-wrap">
+                {{ category_visual(cat, category_images, svg_macros) }}
+            </div>
+            <div class="cat-label-en">{{ t[cat] }}</div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

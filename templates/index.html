@@ -1,22 +1,17 @@
 {% extends "base.html" %}
-{% from "icons.html" import hire_icon, worker_icon %}
 
 {% block content %}
 <div class="role-container">
 
-    <!-- HIRE TILE -->
     <a href="{{ url_for('hire_categories') }}" class="role-tile hire">
-        <div class="tile-content">
-            <div class="tile-img">{{ hire_icon() }}</div>
+        <div class="tile-overlay">
             <div class="label-en">{{ t.hire }}</div>
             <div class="subtitle">{{ t.hire_subtitle }}</div>
         </div>
     </a>
 
-    <!-- WORKER TILE -->
     <a href="{{ url_for('worker_categories') }}" class="role-tile worker">
-        <div class="tile-content">
-            <div class="tile-img">{{ worker_icon() }}</div>
+        <div class="tile-overlay">
             <div class="label-en">{{ t.worker }}</div>
             <div class="subtitle">{{ t.worker_subtitle }}</div>
         </div>
