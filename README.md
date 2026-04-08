@@ -53,3 +53,28 @@ VillageHire/
 ## Adding category-tile photos
 
 Drop `hire.jpg` and `worker.jpg` into `static/` to use real photographs as backgrounds for the two main landing tiles. The CSS overlays a dark gradient so the text stays readable.
+
+## Deploy to DigitalOcean App Platform
+
+This repo is ready for **DigitalOcean App Platform**. The deployment files are:
+
+- **`Procfile`** — tells the platform how to run the app via gunicorn
+- **`runtime.txt`** — pins Python 3.12.3
+- **`requirements.txt`** — Flask + gunicorn
+- **`.do/app.yaml`** — full App Platform spec (region, instance size, env vars, health check)
+
+### Quick deploy
+
+1. Go to https://cloud.digitalocean.com/apps
+2. Click **Create App**
+3. Choose **GitHub** → select `jeetenp03/villagehire` → branch `main`
+4. App Platform auto-detects it as a Python app and reads the `Procfile`
+5. Pick the **Basic** plan (`$5/mo`, basic-xxs instance)
+6. Set the env var `SECRET_KEY` to a random string (click "Encrypt" to make it a secret)
+7. Click **Create Resources**
+
+Your app will be live at `https://villagehire-xxxxx.ondigitalocean.app` in 2–5 minutes.
+
+### Important: data persistence
+
+`db.json` is excluded from git (in `.gitignore`) and the App Platform filesystem is **ephemeral** — registrations will be lost on every redeploy. For production, set `DB_PATH` to point to a mounted volume, or replace the JSON storage with a real database (DigitalOcean offers managed PostgreSQL from $15/mo).

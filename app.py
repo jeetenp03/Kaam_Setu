@@ -5,9 +5,11 @@ import os
 from translations import TRANSLATIONS, LANGUAGES
 
 app = Flask(__name__)
-app.secret_key = "village-hire-secret-key"
+app.secret_key = os.environ.get("SECRET_KEY", "village-hire-dev-key-change-in-production")
 
-DB_FILE = "db.json"
+# Use a writable location for the JSON database. On DigitalOcean App Platform
+# the working directory is read-only at runtime; mount /tmp or set DB_PATH.
+DB_FILE = os.environ.get("DB_PATH", "db.json")
 DEFAULT_LANG = "en"
 
 # Map category keys to PNG files in static/images/
@@ -127,4 +129,6 @@ def directory():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5050)
+    port = int(os.environ.get("PORT", 5050))
+    debug = os.environ.get("FLASK_ENV") != "production"
+    app.run(host="0.0.0.0", port=port, debug=debug)

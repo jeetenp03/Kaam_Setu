@@ -1,0 +1,39 @@
+# DigitalOcean App Platform spec
+# https://docs.digitalocean.com/products/app-platform/reference/app-spec/
+name: villagehire
+region: blr   # Bangalore — closest region for Gujarat users
+
+services:
+  - name: web
+    github:
+      repo: jeetenp03/villagehire
+      branch: main
+      deploy_on_push: true
+
+    source_dir: /
+    environment_slug: python
+    instance_size_slug: basic-xxs   # cheapest tier ($5/mo)
+    instance_count: 1
+    http_port: 8080
+
+    run_command: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
+
+    envs:
+      - key: SECRET_KEY
+        scope: RUN_TIME
+        type: SECRET
+        value: CHANGE_ME_AFTER_DEPLOY
+      - key: FLASK_ENV
+        scope: RUN_TIME
+        value: production
+
+    routes:
+      - path: /
+
+    health_check:
+      http_path: /
+      initial_delay_seconds: 10
+      period_seconds: 30
+      timeout_seconds: 5
+      success_threshold: 1
+      failure_threshold: 3
