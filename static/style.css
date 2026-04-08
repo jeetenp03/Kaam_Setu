@@ -514,27 +514,28 @@ body:has(.register-page) .back-btn-overlay {
     background: rgba(0,0,0,0.75) !important;
 }
 
-/* Form area floats over the hero image as a warm sepia glass card */
+/* Form area floats over the hero image as an aged-paper card */
 .form-container {
     width: 100%;
     background: linear-gradient(
-        160deg,
-        rgba(252, 244, 230, 0.18) 0%,
-        rgba(245, 230, 200, 0.12) 100%
+        165deg,
+        rgba(232, 210, 175, 0.62) 0%,
+        rgba(218, 192, 152, 0.55) 55%,
+        rgba(200, 170, 125, 0.58) 100%
     );
-    backdrop-filter: blur(14px) saturate(1.2);
-    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(0.95);
+    -webkit-backdrop-filter: blur(16px) saturate(0.95);
     border-radius: 22px;
-    padding: 28px 22px;
+    padding: 30px 24px 26px;
     box-shadow:
-        0 22px 55px rgba(40, 20, 5, 0.45),
-        0 4px 14px rgba(40, 20, 5, 0.25),
-        inset 0 1px 0 rgba(255, 250, 235, 0.35);
-    border: 1px solid rgba(180, 130, 70, 0.3);
+        0 18px 45px rgba(30, 15, 5, 0.4),
+        0 4px 12px rgba(30, 15, 5, 0.2),
+        inset 0 1px 0 rgba(255, 240, 210, 0.25);
+    border: 1px solid rgba(120, 80, 40, 0.35);
 }
 
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .form-row {
@@ -563,13 +564,13 @@ body:has(.register-page) .back-btn-overlay {
 
 .form-group label {
     display: block;
-    font-size: 1rem;
+    font-size: 0.76rem;
     font-weight: 700;
     color: #3a1f08;
     margin-bottom: 8px;
     padding-left: 4px;
-    letter-spacing: 0.2px;
-    text-shadow: 0 1px 2px rgba(255, 248, 230, 0.6);
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
 }
 
 /* font-size MUST be >= 16px to prevent iOS auto-zoom on focus */
@@ -578,12 +579,11 @@ body:has(.register-page) .back-btn-overlay {
     padding: 14px 16px;
     font-size: 16px;
     color: #2a1505;
-    font-weight: 500;
-    border: 2px solid rgba(139, 69, 19, 0.4);
-    border-radius: 12px;
-    background: rgba(255, 251, 242, 0.12);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    font-weight: 600;
+    border: 1px solid rgba(90, 55, 25, 0.3);
+    border-radius: 10px;
+    background: rgba(245, 228, 195, 0.55);
+    box-shadow: inset 0 1px 2px rgba(60, 35, 10, 0.08);
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     outline: none;
     -webkit-appearance: none;
@@ -591,37 +591,50 @@ body:has(.register-page) .back-btn-overlay {
 }
 
 .form-group input::placeholder {
-    color: rgba(92, 51, 23, 0.5);
+    color: rgba(92, 51, 23, 0.45);
+    font-weight: 500;
+}
+
+.form-group input:hover {
+    border-color: rgba(90, 55, 25, 0.5);
+    background: rgba(248, 232, 200, 0.7);
 }
 
 .form-group input:focus {
-    border-color: #8B4513;
-    background: rgba(255, 253, 246, 0.85);
-    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+    border-color: rgba(90, 55, 25, 0.75);
+    background: rgba(250, 235, 205, 0.85);
+    box-shadow:
+        inset 0 1px 2px rgba(60, 35, 10, 0.1),
+        0 0 0 2px rgba(90, 55, 25, 0.15);
 }
 
 .submit-btn {
     width: 100%;
-    padding: 17px;
-    font-size: 1.2rem;
+    padding: 16px;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #fff5e0;
-    background: linear-gradient(135deg, #3d2817 0%, #5c3317 45%, #8B4513 100%);
-    border: 1px solid rgba(255, 220, 160, 0.25);
-    border-radius: 14px;
+    color: #f5e6c8;
+    background: linear-gradient(180deg, #5c3317 0%, #3d2817 100%);
+    border: 1px solid rgba(120, 80, 40, 0.5);
+    border-radius: 12px;
     cursor: pointer;
-    margin-top: 18px;
-    transition: transform 0.12s, box-shadow 0.2s;
-    letter-spacing: 0.6px;
+    margin-top: 22px;
+    transition: transform 0.12s, background 0.2s;
+    letter-spacing: 0.7px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     box-shadow:
-        0 8px 20px rgba(60, 30, 5, 0.5),
-        inset 0 1px 0 rgba(255, 220, 160, 0.3);
-    min-height: 58px;
+        0 4px 12px rgba(40, 20, 5, 0.35),
+        inset 0 1px 0 rgba(245, 215, 165, 0.18);
+    min-height: 56px;
+    text-transform: uppercase;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(180deg, #6b3d1c 0%, #4a2f1c 100%);
 }
 
 .submit-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
 }
 
 /* ══════════════════════════════════════════
