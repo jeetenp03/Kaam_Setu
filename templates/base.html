@@ -16,10 +16,6 @@
 <body>
     {% block topbar %}
     <header class="top-bar">
-        <a href="{{ url_for('home') }}" class="navbar-brand">
-            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="" class="brand-logo">
-        </a>
-
         <a href="{{ url_for('home') }}" class="brand-text">{{ t.app_title }}</a>
 
         <div class="lang-switcher">
