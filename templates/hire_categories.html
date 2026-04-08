@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon %}
+
+{% block content %}
+<a href="{{ url_for('home') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+<div class="page-title">{{ t.what_work }}</div>
+
+<div class="category-grid">
+
+    <a href="{{ url_for('register', role='hire', category='electrician') }}" class="cat-tile" data-cat="electrician">
+        <div class="cat-icon-wrap">{{ electrician_icon() }}</div>
+        <div class="cat-label-en">{{ t.electrician }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='labor') }}" class="cat-tile" data-cat="labor">
+        <div class="cat-icon-wrap">{{ labor_icon() }}</div>
+        <div class="cat-label-en">{{ t.labor }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='painter') }}" class="cat-tile" data-cat="painter">
+        <div class="cat-icon-wrap">{{ painter_icon() }}</div>
+        <div class="cat-label-en">{{ t.painter }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='carpentry') }}" class="cat-tile" data-cat="carpentry">
+        <div class="cat-icon-wrap">{{ carpentry_icon() }}</div>
+        <div class="cat-label-en">{{ t.carpentry }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='plumber') }}" class="cat-tile" data-cat="plumber">
+        <div class="cat-icon-wrap">{{ plumber_icon() }}</div>
+        <div class="cat-label-en">{{ t.plumber }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='mason') }}" class="cat-tile" data-cat="mason">
+        <div class="cat-icon-wrap">{{ mason_icon() }}</div>
+        <div class="cat-label-en">{{ t.mason }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='tailor') }}" class="cat-tile" data-cat="tailor">
+        <div class="cat-icon-wrap">{{ tailor_icon() }}</div>
+        <div class="cat-label-en">{{ t.tailor }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='driver') }}" class="cat-tile" data-cat="driver">
+        <div class="cat-icon-wrap">{{ driver_icon() }}</div>
+        <div class="cat-label-en">{{ t.driver }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='cook') }}" class="cat-tile" data-cat="cook">
+        <div class="cat-icon-wrap">{{ cook_icon() }}</div>
+        <div class="cat-label-en">{{ t.cook }}</div>
+    </a>
+
+    <a href="{{ url_for('register', role='hire', category='farming') }}" class="cat-tile" data-cat="farming">
+        <div class="cat-icon-wrap">{{ farming_icon() }}</div>
+        <div class="cat-label-en">{{ t.farming }}</div>
+    </a>
+
+</div>
+{% endblock %}

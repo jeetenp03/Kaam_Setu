@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% set icon_map = {
+    'electrician': '&#x26A1;', 'labor': '&#x1F9F1;', 'painter': '&#x1F3A8;',
+    'carpentry': '&#x1FA9A;', 'plumber': '&#x1F6BF;', 'mason': '&#x1F9F1;',
+    'tailor': '&#x1F9F5;', 'driver': '&#x1F69C;', 'cook': '&#x1F373;', 'farming': '&#x1F33E;'
+} %}
+
+{% block content %}
+<a href="{{ url_for('home') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+
+<div class="directory-list">
+    {% if workers %}
+        {% for w in workers %}
+        <div class="worker-card">
+            <div class="card-icon">{{ icon_map.get(w.category, '&#x1F464;') | safe }}</div>
+            <div class="card-info">
+                <h3>{{ w.name }}</h3>
+                <p>{{ t[w.category] if w.category in t else w.category }} &middot; {{ w.village }}</p>
+            </div>
+            <a href="tel:{{ w.phone }}" class="card-phone">&#x1F4DE;</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">{{ t.no_workers }}</div>
+    {% endif %}
+</div>
+{% endblock %}

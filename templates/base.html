@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#c0392b">
+    <title>{{ t.app_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .role-tile.hire {
+            background-image: url('{{ url_for("static", filename="hire.jpg") }}');
+            background-size: cover;
+            background-position: center;
+        }
+        .role-tile.worker {
+            background-image: url('{{ url_for("static", filename="worker.jpg") }}');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    {% from "icons.html" import app_logo %}
+    {% block topbar %}
+    <header class="top-bar">
+        <!-- Decorative top stripe (saffron-white-green inspired) -->
+        <div class="navbar-stripe"></div>
+
+        <div class="navbar-inner">
+            <!-- LEFT — logo -->
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <div class="navbar-logo">{{ app_logo() }}</div>
+                <div class="navbar-title">
+                    <div class="title-main">{{ t.app_title }}</div>
+                    <div class="title-tag">
+                        {% if lang == 'gu' %}ગુજરાતના ગામો માટે
+                        {% elif lang == 'hi' %}गुजरात के गाँवों के लिए
+                        {% else %}For the Villages of Gujarat
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+
+            <!-- RIGHT — language switcher -->
+            <div class="lang-switcher">
+                {% for l in languages %}
+                    <a href="{{ url_for('set_language', code=l.code) }}"
+                       class="lang-btn {% if lang == l.code %}active{% endif %}"
+                       title="{{ l.code }}">
+                        {{ l.label }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Decorative bottom border (Bandhani-inspired dots) -->
+        <div class="navbar-border"></div>
+    </header>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

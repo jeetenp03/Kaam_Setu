@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% from "icons.html" import electrician_icon, labor_icon, painter_icon, carpentry_icon, plumber_icon, mason_icon, tailor_icon, driver_icon, cook_icon, farming_icon %}
+
+{% set icon_dispatch = {
+    'electrician': electrician_icon,
+    'labor': labor_icon,
+    'painter': painter_icon,
+    'carpentry': carpentry_icon,
+    'plumber': plumber_icon,
+    'mason': mason_icon,
+    'tailor': tailor_icon,
+    'driver': driver_icon,
+    'cook': cook_icon,
+    'farming': farming_icon
+} %}
+
+{% block content %}
+<a href="{{ url_for('worker_categories') if role == 'worker' else url_for('hire_categories') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+
+<div class="form-container">
+    <div class="form-header">
+        <div class="form-icon-wrap">
+            {% if category in icon_dispatch %}
+                {{ icon_dispatch[category]() }}
+            {% endif %}
+        </div>
+        <h2>{{ t[category] if category in t else category }}</h2>
+        <div class="form-subtitle">
+            {% if role == 'worker' %}
+                {{ t.register_as_worker }}
+            {% else %}
+                {{ t.post_hire_request }}
+            {% endif %}
+        </div>
+    </div>
+
+    <form action="{{ url_for('submit') }}" method="POST">
+        <input type="hidden" name="role" value="{{ role }}">
+        <input type="hidden" name="category" value="{{ category }}">
+
+        <div class="form-group">
+            <label>{{ t.name }}</label>
+            <input type="text" name="name" required placeholder="{{ t.name_placeholder }}">
+        </div>
+
+        <div class="form-group">
+            <label>{{ t.phone }}</label>
+            <input type="tel" name="phone" required placeholder="{{ t.phone_placeholder }}"
+                   pattern="[0-9]{10}" title="10 digit mobile number">
+        </div>
+
+        <div class="form-group">
+            <label>{{ t.village }}</label>
+            <input type="text" name="village" required placeholder="{{ t.village_placeholder }}">
+        </div>
+
+        <button type="submit" class="submit-btn">
+            {% if role == 'worker' %}
+                {{ t.register_btn }} &#x2714;
+            {% else %}
+                {{ t.post_request_btn }} &#x2714;
+            {% endif %}
+        </button>
+    </form>
+</div>
+{% endblock %}

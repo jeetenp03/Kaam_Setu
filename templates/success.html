@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "icons.html" import success_check %}
+
+{% block content %}
+<div class="success-page">
+    <div class="checkmark">{{ success_check() }}</div>
+    <h2>{{ name }}, {{ t.done }}</h2>
+    <p>
+        {% if role == 'worker' %}
+            {{ t.worker_registered }}
+        {% else %}
+            {{ t.request_posted }}
+        {% endif %}
+    </p>
+    <a href="{{ url_for('home') }}" class="home-btn">&#x1F3E0; {{ t.home }}</a>
+</div>
+{% endblock %}

@@ -1,0 +1,263 @@
+{# ═══════════════════════════════════════════════
+   REUSABLE SVG ICONS — VILLAGE WORKER THEMES
+   Each icon depicts the trade visually so even
+   non-readers can identify the category.
+   ═══════════════════════════════════════════════ #}
+
+{% macro app_logo() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sun behind village -->
+  <circle cx="40" cy="32" r="18" fill="#FFB300"/>
+  <g stroke="#FF8F00" stroke-width="2.5" stroke-linecap="round">
+    <line x1="40" y1="6"  x2="40" y2="11"/>
+    <line x1="40" y1="53" x2="40" y2="58"/>
+    <line x1="14" y1="32" x2="19" y2="32"/>
+    <line x1="61" y1="32" x2="66" y2="32"/>
+    <line x1="22" y1="14" x2="25" y2="17"/>
+    <line x1="55" y1="47" x2="58" y2="50"/>
+    <line x1="22" y1="50" x2="25" y2="47"/>
+    <line x1="55" y1="17" x2="58" y2="14"/>
+  </g>
+  <!-- Center hut (larger) -->
+  <polygon points="40,28 22,46 58,46" fill="#C0392B" stroke="#7B241C" stroke-width="2"/>
+  <rect x="28" y="46" width="24" height="20" fill="#F4D6B0" stroke="#8B6914" stroke-width="2"/>
+  <rect x="36" y="54" width="8" height="12" fill="#5D4037"/>
+  <!-- Left hut -->
+  <polygon points="14,42 4,54 24,54" fill="#A0522D" stroke="#5D4037" stroke-width="1.5"/>
+  <rect x="6" y="54" width="16" height="14" fill="#FFE0B2" stroke="#8B6914" stroke-width="1.5"/>
+  <rect x="11" y="60" width="6" height="8" fill="#5D4037"/>
+  <!-- Right hut -->
+  <polygon points="66,42 56,54 76,54" fill="#A0522D" stroke="#5D4037" stroke-width="1.5"/>
+  <rect x="58" y="54" width="16" height="14" fill="#FFE0B2" stroke="#8B6914" stroke-width="1.5"/>
+  <rect x="63" y="60" width="6" height="8" fill="#5D4037"/>
+  <!-- Ground -->
+  <path d="M0 68 Q40 64 80 68 L80 80 L0 80 Z" fill="#558B2F"/>
+  <path d="M0 70 Q40 66 80 70" fill="none" stroke="#33691E" stroke-width="1"/>
+</svg>
+{% endmacro %}
+
+{% macro hire_icon() %}
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Person in white kurta (hirer) giving money -->
+  <circle cx="60" cy="28" r="16" fill="#f5deb3"/>
+  <path d="M60 10 Q50 10 48 28 Q48 38 60 44 Q72 38 72 28 Q70 10 60 10Z" fill="#f5deb3"/>
+  <!-- Turban -->
+  <path d="M46 22 Q46 8 60 6 Q74 8 74 22 Q72 14 60 12 Q48 14 46 22Z" fill="#e07020"/>
+  <!-- Kurta body -->
+  <path d="M38 48 Q42 44 60 44 Q78 44 82 48 L86 100 H34 L38 48Z" fill="#f5f5dc"/>
+  <!-- Arm extending with money -->
+  <path d="M82 54 L100 68 L96 72 L78 60Z" fill="#f5deb3"/>
+  <!-- Money/notes -->
+  <rect x="92" y="62" width="20" height="12" rx="2" fill="#7cb342" stroke="#558b2f" stroke-width="1"/>
+  <rect x="94" y="64" width="16" height="3" rx="1" fill="#9ccc65"/>
+  <!-- Dhoti -->
+  <path d="M42 100 L38 118 H50 L54 100Z" fill="#fff8e1"/>
+  <path d="M78 100 L82 118 H70 L66 100Z" fill="#fff8e1"/>
+</svg>
+{% endmacro %}
+
+{% macro worker_icon() %}
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Worker with tools -->
+  <circle cx="60" cy="28" r="16" fill="#d2a679"/>
+  <!-- Head cloth -->
+  <path d="M46 24 Q46 12 60 10 Q74 12 74 24 Q70 16 60 15 Q50 16 46 24Z" fill="#c97a3a"/>
+  <!-- Body in work clothes -->
+  <path d="M38 48 Q42 44 60 44 Q78 44 82 48 L84 100 H36 L38 48Z" fill="#8d6e4c"/>
+  <!-- Arm holding hammer -->
+  <path d="M36 52 L18 40 L14 44 L34 58Z" fill="#d2a679"/>
+  <!-- Hammer -->
+  <rect x="6" y="32" width="14" height="8" rx="2" fill="#616161"/>
+  <rect x="12" y="38" width="3" height="18" rx="1" fill="#8d6e63"/>
+  <!-- Wrench in other hand -->
+  <path d="M82 54 L98 46Z" fill="none" stroke="#78909c" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="100" cy="44" r="5" fill="none" stroke="#78909c" stroke-width="2.5"/>
+  <!-- Legs -->
+  <path d="M44 100 L40 118 H52 L50 100Z" fill="#6d4c32"/>
+  <path d="M76 100 L80 118 H68 L70 100Z" fill="#6d4c32"/>
+</svg>
+{% endmacro %}
+
+{% macro electrician_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Light bulb -->
+  <path d="M40 8 Q24 8 24 28 Q24 40 34 46 L34 54 H46 L46 46 Q56 40 56 28 Q56 8 40 8Z" fill="#FFD54F" stroke="#F9A825" stroke-width="2"/>
+  <!-- Bulb base -->
+  <rect x="34" y="54" width="12" height="4" rx="1" fill="#9E9E9E"/>
+  <rect x="35" y="58" width="10" height="3" rx="1" fill="#BDBDBD"/>
+  <rect x="36" y="61" width="8" height="2" rx="1" fill="#9E9E9E"/>
+  <!-- Lightning bolt -->
+  <polygon points="42,18 36,34 42,34 38,48 50,30 44,30 48,18" fill="#FF8F00"/>
+  <!-- Filament glow -->
+  <circle cx="40" cy="28" r="8" fill="#FFF9C4" opacity="0.4"/>
+</svg>
+{% endmacro %}
+
+{% macro labor_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brick and shovel -->
+  <rect x="10" y="50" width="28" height="16" rx="2" fill="#D84315" stroke="#BF360C" stroke-width="1.5"/>
+  <rect x="14" y="54" width="10" height="4" rx="1" fill="#E57373" opacity="0.6"/>
+  <rect x="18" y="42" width="28" height="16" rx="2" fill="#E65100" stroke="#BF360C" stroke-width="1.5"/>
+  <!-- Shovel -->
+  <rect x="56" y="10" width="4" height="50" rx="2" fill="#8D6E63"/>
+  <path d="M52 56 L66 56 L62 72 L56 72Z" fill="#78909C" stroke="#546E7A" stroke-width="1.5"/>
+</svg>
+{% endmacro %}
+
+{% macro painter_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paint bucket -->
+  <path d="M16 30 H54 L50 70 H20 Z" fill="#1976D2" stroke="#0D47A1" stroke-width="2"/>
+  <ellipse cx="35" cy="30" rx="19" ry="6" fill="#42A5F5" stroke="#0D47A1" stroke-width="1.5"/>
+  <!-- Paint drip -->
+  <path d="M54 36 Q62 36 60 48 Q58 56 54 50Z" fill="#1976D2"/>
+  <!-- Paint roller -->
+  <rect x="52" y="8" width="18" height="12" rx="4" fill="#E53935" stroke="#C62828" stroke-width="1.5"/>
+  <rect x="59" y="20" width="4" height="28" rx="2" fill="#8D6E63"/>
+  <!-- Color splashes -->
+  <circle cx="26" cy="44" r="4" fill="#FFEB3B" opacity="0.7"/>
+  <circle cx="40" cy="50" r="3" fill="#4CAF50" opacity="0.7"/>
+  <circle cx="32" cy="56" r="3.5" fill="#FF9800" opacity="0.7"/>
+</svg>
+{% endmacro %}
+
+{% macro carpentry_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Saw -->
+  <rect x="8" y="14" width="6" height="24" rx="2" fill="#8D6E63"/>
+  <path d="M14 14 L68 14 L68 24 L14 30Z" fill="#B0BEC5" stroke="#78909C" stroke-width="1.5"/>
+  <path d="M18 24 L22 18 L26 24 L30 18 L34 24 L38 18 L42 24 L46 18 L50 24 L54 18 L58 24 L62 18 L66 24" fill="none" stroke="#546E7A" stroke-width="1.5"/>
+  <!-- Wood plank -->
+  <rect x="10" y="44" width="60" height="14" rx="3" fill="#D7A86E" stroke="#A67C52" stroke-width="1.5"/>
+  <line x1="20" y1="44" x2="22" y2="58" stroke="#C19A6B" stroke-width="1"/>
+  <line x1="42" y1="44" x2="40" y2="58" stroke="#C19A6B" stroke-width="1"/>
+  <!-- Wood grain -->
+  <path d="M12 62 Q40 68 68 62" fill="none" stroke="#A67C52" stroke-width="1"/>
+</svg>
+{% endmacro %}
+
+{% macro plumber_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pipe -->
+  <rect x="10" y="20" width="40" height="10" rx="2" fill="#78909C" stroke="#546E7A" stroke-width="1.5"/>
+  <rect x="42" y="20" width="10" height="40" rx="2" fill="#78909C" stroke="#546E7A" stroke-width="1.5"/>
+  <rect x="30" y="52" width="30" height="10" rx="2" fill="#78909C" stroke="#546E7A" stroke-width="1.5"/>
+  <!-- Pipe joint -->
+  <rect x="40" y="18" width="14" height="14" rx="2" fill="#90A4AE" stroke="#546E7A" stroke-width="1.5"/>
+  <!-- Water drops -->
+  <path d="M24 34 Q26 40 24 44 Q22 40 24 34Z" fill="#42A5F5"/>
+  <path d="M32 36 Q34 42 32 46 Q30 42 32 36Z" fill="#64B5F6"/>
+  <!-- Wrench -->
+  <rect x="58" y="10" width="4" height="36" rx="2" fill="#8D6E63"/>
+  <path d="M54 8 L66 8 L64 16 L56 16Z" fill="#607D8B"/>
+</svg>
+{% endmacro %}
+
+{% macro mason_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brick wall -->
+  <rect x="8" y="40" width="20" height="10" rx="1" fill="#E65100" stroke="#BF360C" stroke-width="1"/>
+  <rect x="30" y="40" width="20" height="10" rx="1" fill="#D84315" stroke="#BF360C" stroke-width="1"/>
+  <rect x="52" y="40" width="20" height="10" rx="1" fill="#E65100" stroke="#BF360C" stroke-width="1"/>
+  <rect x="16" y="52" width="20" height="10" rx="1" fill="#D84315" stroke="#BF360C" stroke-width="1"/>
+  <rect x="38" y="52" width="20" height="10" rx="1" fill="#E65100" stroke="#BF360C" stroke-width="1"/>
+  <rect x="8" y="64" width="20" height="10" rx="1" fill="#E65100" stroke="#BF360C" stroke-width="1"/>
+  <rect x="30" y="64" width="20" height="10" rx="1" fill="#D84315" stroke="#BF360C" stroke-width="1"/>
+  <rect x="52" y="64" width="20" height="10" rx="1" fill="#E65100" stroke="#BF360C" stroke-width="1"/>
+  <!-- Trowel -->
+  <polygon points="40,6 56,26 50,30 34,10" fill="#B0BEC5" stroke="#78909C" stroke-width="1.5"/>
+  <rect x="30" y="26" width="4" height="14" rx="1" fill="#8D6E63" transform="rotate(-20 32 33)"/>
+</svg>
+{% endmacro %}
+
+{% macro tailor_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sewing machine silhouette -->
+  <rect x="12" y="54" width="56" height="6" rx="2" fill="#5D4037"/>
+  <!-- Machine body -->
+  <path d="M20 54 L20 30 Q20 24 30 24 L50 24 Q56 24 56 30 L56 54Z" fill="#7B1FA2" stroke="#4A148C" stroke-width="1.5"/>
+  <!-- Needle -->
+  <rect x="44" y="36" width="2" height="18" fill="#E0E0E0"/>
+  <circle cx="45" cy="36" r="2" fill="#BDBDBD"/>
+  <!-- Thread spool -->
+  <circle cx="34" cy="16" r="8" fill="#E91E63" stroke="#C2185B" stroke-width="1.5"/>
+  <circle cx="34" cy="16" r="3" fill="#FCE4EC"/>
+  <!-- Thread line -->
+  <path d="M34 24 Q40 28 45 36" fill="none" stroke="#E91E63" stroke-width="1"/>
+  <!-- Cloth -->
+  <path d="M16 60 Q30 66 50 60 L50 74 Q30 70 16 74Z" fill="#CE93D8" stroke="#AB47BC" stroke-width="1"/>
+</svg>
+{% endmacro %}
+
+{% macro driver_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tractor body -->
+  <path d="M14 42 L14 56 L62 56 L66 42 L50 32 L30 32 L14 42Z" fill="#388E3C" stroke="#2E7D32" stroke-width="2"/>
+  <!-- Cabin -->
+  <rect x="28" y="22" width="22" height="18" rx="2" fill="#81C784" stroke="#2E7D32" stroke-width="1.5"/>
+  <rect x="32" y="26" width="14" height="10" rx="1" fill="#C8E6C9"/>
+  <!-- Big rear wheel -->
+  <circle cx="22" cy="60" r="14" fill="#424242" stroke="#212121" stroke-width="2"/>
+  <circle cx="22" cy="60" r="6" fill="#757575"/>
+  <circle cx="22" cy="60" r="2" fill="#424242"/>
+  <!-- Small front wheel -->
+  <circle cx="58" cy="60" r="8" fill="#424242" stroke="#212121" stroke-width="2"/>
+  <circle cx="58" cy="60" r="3" fill="#757575"/>
+  <!-- Exhaust -->
+  <rect x="16" y="18" width="4" height="14" rx="2" fill="#616161"/>
+  <circle cx="18" cy="14" r="3" fill="#E0E0E0" opacity="0.5"/>
+</svg>
+{% endmacro %}
+
+{% macro cook_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cooking pot -->
+  <ellipse cx="40" cy="50" rx="26" ry="8" fill="#5D4037"/>
+  <path d="M14 42 Q14 54 40 58 Q66 54 66 42Z" fill="#795548" stroke="#4E342E" stroke-width="2"/>
+  <ellipse cx="40" cy="42" rx="26" ry="8" fill="#8D6E63" stroke="#4E342E" stroke-width="1.5"/>
+  <!-- Steam -->
+  <path d="M28 36 Q26 28 30 22" fill="none" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M40 34 Q38 24 42 18" fill="none" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M52 36 Q50 28 54 22" fill="none" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <!-- Fire -->
+  <path d="M30 62 Q34 56 32 64 Q36 58 38 66 Q40 58 42 66 Q44 58 48 64 Q46 56 50 62" fill="#FF7043" opacity="0.8"/>
+  <path d="M34 64 Q38 58 40 66 Q42 58 46 64" fill="#FFAB40" opacity="0.7"/>
+  <!-- Ladle -->
+  <path d="M58 30 L68 14" stroke="#8D6E63" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="58" cy="32" r="5" fill="#9E9E9E" stroke="#757575" stroke-width="1"/>
+</svg>
+{% endmacro %}
+
+{% macro farming_icon() %}
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rice/wheat stalks -->
+  <path d="M20 70 L24 20" stroke="#8D6E63" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M40 70 L40 16" stroke="#8D6E63" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M60 70 L56 22" stroke="#8D6E63" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Wheat grains on stalk 1 -->
+  <ellipse cx="22" cy="22" rx="4" ry="7" fill="#FFD54F" transform="rotate(-10 22 22)"/>
+  <ellipse cx="18" cy="30" rx="3.5" ry="6" fill="#FFCA28" transform="rotate(15 18 30)"/>
+  <ellipse cx="26" cy="28" rx="3.5" ry="6" fill="#FFC107" transform="rotate(-15 26 28)"/>
+  <!-- Wheat grains on stalk 2 -->
+  <ellipse cx="40" cy="18" rx="4" ry="7" fill="#FFD54F"/>
+  <ellipse cx="35" cy="26" rx="3.5" ry="6" fill="#FFCA28" transform="rotate(15 35 26)"/>
+  <ellipse cx="45" cy="24" rx="3.5" ry="6" fill="#FFC107" transform="rotate(-15 45 24)"/>
+  <!-- Wheat grains on stalk 3 -->
+  <ellipse cx="55" cy="24" rx="4" ry="7" fill="#FFD54F" transform="rotate(8 55 24)"/>
+  <ellipse cx="51" cy="32" rx="3.5" ry="6" fill="#FFCA28" transform="rotate(15 51 32)"/>
+  <ellipse cx="59" cy="30" rx="3.5" ry="6" fill="#FFC107" transform="rotate(-12 59 30)"/>
+  <!-- Ground -->
+  <path d="M4 70 Q40 64 76 70" fill="none" stroke="#A1887F" stroke-width="2"/>
+  <!-- Sickle -->
+  <path d="M62 56 Q70 48 66 38 Q62 44 56 48Z" fill="#B0BEC5" stroke="#78909C" stroke-width="1.5"/>
+  <rect x="62" y="54" width="3" height="16" rx="1" fill="#8D6E63"/>
+</svg>
+{% endmacro %}
+
+{% macro success_check() %}
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="46" fill="#4CAF50" stroke="#388E3C" stroke-width="3"/>
+  <path d="M28 50 L44 66 L72 34" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+{% endmacro %}
