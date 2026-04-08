@@ -10,7 +10,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "village-hire-dev-key-change-in-pr
 # Use a writable location for the JSON database. On DigitalOcean App Platform
 # the working directory is read-only at runtime; mount /tmp or set DB_PATH.
 DB_FILE = os.environ.get("DB_PATH", "db.json")
-DEFAULT_LANG = "en"
+DEFAULT_LANG = "gu"
 
 # Map category keys to PNG files in static/images/
 # Categories not in this dict fall back to SVG icons.

@@ -1,6 +1,6 @@
-# Village Hire — ગામ મજૂર
+# Kaam Setu — કામ સેતુ — काम सेतु
 
-A tile-based Flask web app that connects villagers needing work with people who want to hire them. Designed for **rural Gujarat** with large visual tiles, hand-drawn SVG illustrations, and **trilingual support** (English, Hindi, Gujarati) so even non-readers can use it.
+**"Work Bridge"** — a tile-based Flask web app that connects villagers needing work with people who want to hire them. Designed for **rural Gujarat** with large visual tiles, hand-drawn SVG illustrations, and **trilingual support** (English, Hindi, Gujarati) so even non-readers can use it.
 
 ## Features
 

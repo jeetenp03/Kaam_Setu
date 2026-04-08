@@ -1,6 +1,6 @@
 # DigitalOcean App Platform spec
 # https://docs.digitalocean.com/products/app-platform/reference/app-spec/
-name: villagehire
+name: kaam-setu
 region: blr   # Bangalore — closest region for Gujarat users
 
 services:

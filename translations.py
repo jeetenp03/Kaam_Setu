@@ -5,7 +5,7 @@
 TRANSLATIONS = {
     "en": {
         # ── App ──
-        "app_title": "VILLAGE HIRE",
+        "app_title": "KAAM SETU",
         "lang_name": "English",
 
         # ── Landing ──
@@ -57,7 +57,7 @@ TRANSLATIONS = {
 
     "hi": {
         # ── App ──
-        "app_title": "गाँव मज़दूर",
+        "app_title": "काम सेतु",
         "lang_name": "हिन्दी",
 
         # ── Landing ──
@@ -109,7 +109,7 @@ TRANSLATIONS = {
 
     "gu": {
         # ── App ──
-        "app_title": "ગામ મજૂર",
+        "app_title": "કામ સેતુ",
         "lang_name": "ગુજરાતી",
 
         # ── Landing ──
@@ -161,7 +161,7 @@ TRANSLATIONS = {
 }
 
 LANGUAGES = [
-    {"code": "en", "label": "EN"},
-    {"code": "hi", "label": "हि"},
     {"code": "gu", "label": "ગુ"},
+    {"code": "hi", "label": "हि"},
+    {"code": "en", "label": "EN"},
 ]

@@ -16,13 +16,26 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Devanagari', 'Noto Sans Gujarati', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Hind', 'Hind Vadodara', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #f5f0e8;
     min-height: 100vh;
     min-height: 100dvh;
     color: #333;
     overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga", "calt";
+    letter-spacing: -0.005em;
+}
+
+/* Hindi text uses Hind specifically (better Devanagari rendering) */
+:lang(hi) {
+    font-family: 'Hind', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Gujarati text uses Hind Vadodara */
+:lang(gu) {
+    font-family: 'Hind Vadodara', 'Plus Jakarta Sans', sans-serif;
 }
 
 a {
@@ -71,9 +84,9 @@ a {
 }
 
 .brand-text {
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: 0.8px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
     color: #f5e6c8;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -247,9 +260,9 @@ a {
 
 .role-tile .label-en {
     font-size: clamp(2.2rem, 9vw, 4rem);
-    font-weight: 900;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-shadow:
         0 4px 12px rgba(0,0,0,0.85),
         0 2px 4px rgba(0,0,0,0.95);
