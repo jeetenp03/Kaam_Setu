@@ -23,6 +23,8 @@ CATEGORY_IMAGES = {
     "plumber":     "plumber.png",
     "tailor":      "tailor.png",
     "driver":      "driver.png",
+    "cook":        "cook.png",
+    "farming":     "farmer.png",
 }
 
 
