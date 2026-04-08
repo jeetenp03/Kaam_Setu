@@ -2,7 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import json
 import os
 
+# Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
+# available without exporting them by hand on every run.
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from translations import TRANSLATIONS, LANGUAGES
+from sheets import append_registration, fetch_workers
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "village-hire-dev-key-change-in-production")
@@ -29,11 +38,19 @@ CATEGORY_IMAGES = {
 
 
 def load_db():
-    """Load the JSON database."""
+    """Load the JSON database, guaranteeing both top-level lists exist."""
+    data = {"workers": [], "hirers": []}
     if os.path.exists(DB_FILE):
         with open(DB_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"workers": [], "hirers": []}
+            try:
+                loaded = json.load(f)
+                if isinstance(loaded, dict):
+                    data.update(loaded)
+            except json.JSONDecodeError:
+                pass
+    data.setdefault("workers", [])
+    data.setdefault("hirers", [])
+    return data
 
 
 def save_db(data):
@@ -99,8 +116,6 @@ def register(role, category):
 @app.route("/submit", methods=["POST"])
 def submit():
     """Handle registration form submission."""
-    db = load_db()
-
     entry = {
         "name": request.form.get("name", ""),
         "phone": request.form.get("phone", ""),
@@ -109,29 +124,55 @@ def submit():
         "role": request.form.get("role", ""),
     }
 
-    if entry["role"] == "worker":
-        db["workers"].append(entry)
-    else:
+    if entry["role"] != "worker":
         # Hirer-only job details
         entry["workers_needed"] = request.form.get("workers_needed", "")
         entry["start_date"] = request.form.get("start_date", "")
         entry["num_days"] = request.form.get("num_days", "")
         entry["start_time"] = request.form.get("start_time", "")
-        db["hirers"].append(entry)
 
-    save_db(db)
+    # Primary store: Google Sheets (campaign team views registrations there).
+    # Falls back to local JSON if Sheets is not configured or the call fails,
+    # so the form never breaks for users on the ground.
+    print(f"\n[SUBMIT] entry={entry}", flush=True)
+    print(f"[SUBMIT] APPS_SCRIPT_URL set: {bool(os.environ.get('APPS_SCRIPT_URL'))}", flush=True)
+    sheet_ok = False
+    try:
+        sheet_ok = append_registration(entry)
+        print(f"[SUBMIT] append_registration returned: {sheet_ok}", flush=True)
+    except Exception as exc:
+        print(f"[SUBMIT] append_registration RAISED: {type(exc).__name__}: {exc}", flush=True)
+        app.logger.warning("Google Sheets append failed: %s", exc)
+
+    if not sheet_ok:
+        print("[SUBMIT] FALLING BACK to local db.json", flush=True)
+        db = load_db()
+        if entry["role"] == "worker":
+            db["workers"].append(entry)
+        else:
+            db["hirers"].append(entry)
+        save_db(db)
+    else:
+        print("[SUBMIT] OK — wrote to Google Sheet", flush=True)
+
     return render_template("success.html", role=entry["role"], name=entry["name"])
 
 
 @app.route("/directory")
 def directory():
     """View registered workers (for hirers to browse)."""
-    db = load_db()
+    workers = None
+    try:
+        workers = fetch_workers()
+    except Exception as exc:
+        app.logger.warning("Google Sheets fetch failed: %s", exc)
+
+    if workers is None:
+        workers = load_db()["workers"]
+
     category = request.args.get("category", "all")
     if category != "all":
-        workers = [w for w in db["workers"] if w["category"] == category]
-    else:
-        workers = db["workers"]
+        workers = [w for w in workers if w["category"] == category]
     return render_template("directory.html", workers=workers, category=category)
 
 

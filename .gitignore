@@ -32,3 +32,8 @@ logs/
 # ── Environment ──
 .env
 .env.local
+
+# ── Google Cloud service account credentials (NEVER commit) ──
+google-credentials.json
+*-credentials.json
+service-account*.json
