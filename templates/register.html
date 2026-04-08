@@ -17,16 +17,16 @@
 {% block content %}
 {% set has_image = category in category_images %}
 
-<section class="register-page">
-
-    <div class="register-hero{% if not has_image %} hero-svg{% endif %}"
+<section class="register-page{% if not has_image %} register-page-svg{% endif %}"
          {% if has_image %}style="background-image: url('{{ url_for('static', filename='images/' + category_images[category]) }}');"{% endif %}>
-        <a href="{{ url_for('worker_categories') if role == 'worker' else url_for('hire_categories') }}" class="back-btn back-btn-overlay">&#x2190; {{ t.back }}</a>
 
-        {% if not has_image %}
-        <div class="hero-svg-icon">{{ svg_macros[category]() }}</div>
-        {% endif %}
+    <a href="{{ url_for('worker_categories') if role == 'worker' else url_for('hire_categories') }}" class="back-btn back-btn-overlay">&#x2190; {{ t.back }}</a>
 
+    {% if not has_image %}
+    <div class="hero-svg-icon">{{ svg_macros[category]() }}</div>
+    {% endif %}
+
+    <div class="register-content">
         <div class="hero-overlay">
             <h2 class="hero-title">{{ t[category] if category in t else category }}</h2>
             <div class="hero-subtitle">
@@ -37,37 +37,63 @@
                 {% endif %}
             </div>
         </div>
-    </div>
 
-    <div class="form-container">
-        <form action="{{ url_for('submit') }}" method="POST">
-            <input type="hidden" name="role" value="{{ role }}">
-            <input type="hidden" name="category" value="{{ category }}">
+        <div class="form-container">
+            <form action="{{ url_for('submit') }}" method="POST">
+                <input type="hidden" name="role" value="{{ role }}">
+                <input type="hidden" name="category" value="{{ category }}">
 
-            <div class="form-group">
-                <label>{{ t.name }}</label>
-                <input type="text" name="name" required placeholder="{{ t.name_placeholder }}">
-            </div>
+                <div class="form-group">
+                    <label>{{ t.name }}</label>
+                    <input type="text" name="name" required placeholder="{{ t.name_placeholder }}">
+                </div>
 
-            <div class="form-group">
-                <label>{{ t.phone }}</label>
-                <input type="tel" name="phone" required placeholder="{{ t.phone_placeholder }}"
-                       pattern="[0-9]{10}" title="10 digit mobile number">
-            </div>
+                <div class="form-group">
+                    <label>{{ t.phone }}</label>
+                    <input type="tel" name="phone" required placeholder="{{ t.phone_placeholder }}"
+                           pattern="[0-9]{10}" title="10 digit mobile number">
+                </div>
 
-            <div class="form-group">
-                <label>{{ t.village }}</label>
-                <input type="text" name="village" required placeholder="{{ t.village_placeholder }}">
-            </div>
+                <div class="form-group">
+                    <label>{{ t.village }}</label>
+                    <input type="text" name="village" required placeholder="{{ t.village_placeholder }}">
+                </div>
 
-            <button type="submit" class="submit-btn">
-                {% if role == 'worker' %}
-                    {{ t.register_btn }} &#x2714;
-                {% else %}
-                    {{ t.post_request_btn }} &#x2714;
+                {% if role != 'worker' %}
+                <div class="form-group">
+                    <label>{{ t.workers_needed }}</label>
+                    <input type="number" name="workers_needed" required min="1" max="999"
+                           placeholder="{{ t.workers_needed_placeholder }}">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>{{ t.start_date }}</label>
+                        <input type="date" name="start_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ t.num_days }}</label>
+                        <input type="number" name="num_days" required min="1" max="365"
+                               placeholder="{{ t.num_days_placeholder }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>{{ t.start_time }}</label>
+                    <input type="time" name="start_time" required>
+                </div>
                 {% endif %}
-            </button>
-        </form>
+
+                <button type="submit" class="submit-btn">
+                    {% if role == 'worker' %}
+                        {{ t.register_btn }} &#x2714;
+                    {% else %}
+                        {{ t.post_request_btn }} &#x2714;
+                    {% endif %}
+                </button>
+            </form>
+        </div>
     </div>
 
 </section>

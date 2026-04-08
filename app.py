@@ -15,16 +15,16 @@ DEFAULT_LANG = "gu"
 # Map category keys to PNG files in static/images/
 # Categories not in this dict fall back to SVG icons.
 CATEGORY_IMAGES = {
-    "electrician": "electrician.png",
-    "labor":       "labor.png",
-    "painter":     "painter.png",
-    "carpentry":   "lumber.png",
-    "mason":       "manson.png",
-    "plumber":     "plumber.png",
-    "tailor":      "tailor.png",
-    "driver":      "driver.png",
-    "cook":        "cook.png",
-    "farming":     "farmer.png",
+    "electrician" : "electrician.png",
+    "labor"       : "labor.png",
+    "painter"     : "painter.png",
+    "carpentry"   : "lumber.png",
+    "mason"       : "manson.png",
+    "plumber"     : "plumber.png",
+    "tailor"      : "tailor.png",
+    "driver"      : "driver.png",
+    "cook"        : "cook.png",
+    "farming"     : "farmer.png",
 }
 
 
@@ -112,6 +112,11 @@ def submit():
     if entry["role"] == "worker":
         db["workers"].append(entry)
     else:
+        # Hirer-only job details
+        entry["workers_needed"] = request.form.get("workers_needed", "")
+        entry["start_date"] = request.form.get("start_date", "")
+        entry["num_days"] = request.form.get("num_days", "")
+        entry["start_time"] = request.form.get("start_time", "")
         db["hirers"].append(entry)
 
     save_db(db)

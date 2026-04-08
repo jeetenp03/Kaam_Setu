@@ -33,6 +33,13 @@ TRANSLATIONS = {
         "post_request_btn": "POST REQUEST",
         "register_as_worker": "Register as Worker",
         "post_hire_request": "Post a Hire Request",
+        # ── Hirer-only fields ──
+        "workers_needed": "Workers Needed",
+        "workers_needed_placeholder": "How many people",
+        "start_date": "Start Date",
+        "num_days": "Number of Days",
+        "num_days_placeholder": "How many days",
+        "start_time": "Start Time",
 
         # ── Success ──
         "done": "Done!",
@@ -85,6 +92,13 @@ TRANSLATIONS = {
         "post_request_btn": "अनुरोध करें",
         "register_as_worker": "काम के लिए नाम लिखें",
         "post_hire_request": "काम करवाने के लिए नाम लिखें",
+        # ── Hirer-only fields ──
+        "workers_needed": "कितने मज़दूर चाहिए",
+        "workers_needed_placeholder": "कितने लोग",
+        "start_date": "किस दिन से",
+        "num_days": "कितने दिन",
+        "num_days_placeholder": "दिनों की संख्या",
+        "start_time": "किस समय",
 
         # ── Success ──
         "done": "हो गया!",
@@ -137,6 +151,13 @@ TRANSLATIONS = {
         "post_request_btn": "વિનંતી મોકલો",
         "register_as_worker": "કામ માટે નામ લખો",
         "post_hire_request": "કામ કરાવવા માટે નામ લખો",
+        # ── Hirer-only fields ──
+        "workers_needed": "કેટલા મજૂર જોઈએ",
+        "workers_needed_placeholder": "કેટલા લોકો",
+        "start_date": "કઈ તારીખથી",
+        "num_days": "કેટલા દિવસ",
+        "num_days_placeholder": "દિવસોની સંખ્યા",
+        "start_time": "કયા સમયે",
 
         # ── Success ──
         "done": "થઈ ગયું!",
