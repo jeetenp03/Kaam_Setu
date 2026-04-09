@@ -8,6 +8,11 @@ TRANSLATIONS = {
         "app_title": "KAAM SETU",
         "lang_name": "English",
 
+        # ── Candidate chip (navbar, all pages) ──
+        "candidate_name": "Chandubhai Navasubhai Patel",
+        "candidate_role": "Ambheti Seat · AAP",
+        "vote_date": "Vote: 26 April",
+
         # ── Landing ──
         "hire": "HIRE",
         "worker": "WORKER",
@@ -43,8 +48,8 @@ TRANSLATIONS = {
 
         # ── Success ──
         "done": "Done!",
-        "worker_registered": "You are now registered as a worker.",
-        "request_posted": "Your hire request has been posted.",
+        "worker_registered": "You are now registered as a {category}.",
+        "request_posted": "Your hire request for {category} has been posted.",
 
         # ── Directory ──
         "no_workers": "No workers registered yet.",
@@ -66,6 +71,11 @@ TRANSLATIONS = {
         # ── App ──
         "app_title": "काम सेतु",
         "lang_name": "हिन्दी",
+
+        # ── Candidate chip (navbar, all pages) ──
+        "candidate_name": "चंदुभाई नवसुभाई पटेल",
+        "candidate_role": "अंभेटी सीट · आप",
+        "vote_date": "मतदान: २६ अप्रैल",
 
         # ── Landing ──
         "hire": "काम करवाना है",
@@ -102,8 +112,8 @@ TRANSLATIONS = {
 
         # ── Success ──
         "done": "हो गया!",
-        "worker_registered": "आपका नाम जुड़ गया है।",
-        "request_posted": "आपकी ज़रूरत दर्ज हो गई है।",
+        "worker_registered": "आपका नाम {category} के रूप में जुड़ गया है।",
+        "request_posted": "{category} के लिए आपकी ज़रूरत दर्ज हो गई है।",
 
         # ── Directory ──
         "no_workers": "अभी कोई मज़दूर नहीं है।",
@@ -125,6 +135,11 @@ TRANSLATIONS = {
         # ── App ──
         "app_title": "કામ સેતુ",
         "lang_name": "ગુજરાતી",
+
+        # ── Candidate chip (navbar, all pages) ──
+        "candidate_name": "ચંદુભાઈ નવસુભાઈ પટેલ",
+        "candidate_role": "અંભેટી બેઠક · આપ",
+        "vote_date": "મતદાન: ૨૬ એપ્રિલ",
 
         # ── Landing ──
         "hire": "કામ કરાવવું છે",
@@ -161,8 +176,8 @@ TRANSLATIONS = {
 
         # ── Success ──
         "done": "થઈ ગયું!",
-        "worker_registered": "તમારું નામ જોડાઈ ગયું છે.",
-        "request_posted": "તમારી જરૂરિયાત નોંધાઈ ગઈ છે.",
+        "worker_registered": "તમારું નામ {category} તરીકે જોડાઈ ગયું છે.",
+        "request_posted": "{category} માટે તમારી જરૂરિયાત નોંધાઈ ગઈ છે.",
 
         # ── Directory ──
         "no_workers": "હજુ કોઈ મજૂર નથી.",

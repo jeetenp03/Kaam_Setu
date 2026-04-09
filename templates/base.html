@@ -21,7 +21,12 @@
 <body class="notranslate">
     {% block topbar %}
     <header class="top-bar">
-        <a href="{{ url_for('home') }}" class="brand-text">{{ t.app_title }}</a>
+        <a href="{{ url_for('home') }}" class="brand-group">
+            <span class="brand-text">{{ t.app_title }}</span>
+            <span class="brand-sep">·</span>
+            <span class="brand-candidate">{{ t.candidate_name }}</span>
+            <span class="brand-candidate-sub">{{ t.vote_date }}</span>
+        </a>
 
         <div class="lang-switcher">
             {% for l in languages %}

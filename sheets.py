@@ -26,6 +26,10 @@ REQUEST_TIMEOUT_SECONDS = 8
 def append_registration(entry):
     """Append a registration entry to the linked Google Sheet via Apps Script.
 
+    The Apps Script routes the row to the "Workers" or "Hirers" tab based
+    on the role field. Hirer-only fields (workers_needed, dates, etc.) are
+    only filled in for hire requests.
+
     Returns True on success, False if the URL is unset or the call fails.
     """
     url = os.environ.get("APPS_SCRIPT_URL")
@@ -33,10 +37,15 @@ def append_registration(entry):
         return False
 
     payload = {
+        "role": entry.get("role", ""),
         "name": entry.get("name", ""),
         "phone": entry.get("phone", ""),
         "village": entry.get("village", ""),
         "category": entry.get("category", ""),
+        "workers_needed": entry.get("workers_needed", ""),
+        "start_date": entry.get("start_date", ""),
+        "num_days": entry.get("num_days", ""),
+        "start_time": entry.get("start_time", ""),
     }
 
     response = requests.post(url, json=payload, timeout=REQUEST_TIMEOUT_SECONDS)

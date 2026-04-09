@@ -2,14 +2,15 @@
 {% from "icons.html" import success_check %}
 
 {% block content %}
+{% set category_label = t[category] if category in t else category %}
 <div class="success-page">
     <div class="checkmark">{{ success_check() }}</div>
     <h2>{{ name }}, {{ t.done }}</h2>
     <p>
         {% if role == 'worker' %}
-            {{ t.worker_registered }}
+            {{ t.worker_registered.format(category=category_label) }}
         {% else %}
-            {{ t.request_posted }}
+            {{ t.request_posted.format(category=category_label) }}
         {% endif %}
     </p>
     <a href="{{ url_for('home') }}" class="home-btn">&#x1F3E0; {{ t.home }}</a>

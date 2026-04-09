@@ -155,7 +155,12 @@ def submit():
     else:
         print("[SUBMIT] OK — wrote to Google Sheet", flush=True)
 
-    return render_template("success.html", role=entry["role"], name=entry["name"])
+    return render_template(
+        "success.html",
+        role=entry["role"],
+        name=entry["name"],
+        category=entry["category"],
+    )
 
 
 @app.route("/directory")
