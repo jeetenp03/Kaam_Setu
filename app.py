@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import json
 import os
 
-# Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
-# available without exporting them by hand on every run.
-try:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # available without exporting them by hand on every run.
+try : 
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
@@ -15,6 +15,16 @@ from sheets import append_registration, fetch_workers
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "village-hire-dev-key-change-in-production")
+
+
+@app.context_processor
+def inject_asset_version():
+    """Cache-bust static assets using the style.css mtime."""
+    try:
+        css_path = os.path.join(app.static_folder, "style.css")
+        return {"asset_v": int(os.path.getmtime(css_path))}
+    except OSError:
+        return {"asset_v": "0"}
 
 # Use a writable location for the JSON database. On DigitalOcean App Platform
 # the working directory is read-only at runtime; mount /tmp or set DB_PATH.

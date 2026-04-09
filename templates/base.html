@@ -16,26 +16,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Hind:wght@400;500;600;700&family=Hind+Vadodara:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ asset_v }}">
 </head>
 <body class="notranslate">
     {% block topbar %}
     <header class="top-bar">
-        <a href="{{ url_for('home') }}" class="brand-group">
-            <span class="brand-text">{{ t.app_title }}</span>
-            <span class="brand-sep">·</span>
-            <span class="brand-candidate">{{ t.candidate_name }}</span>
-            <span class="brand-candidate-sub">{{ t.vote_date }}</span>
-        </a>
-
-        <div class="lang-switcher">
-            {% for l in languages %}
-                <a href="{{ url_for('set_language', code=l.code) }}"
-                   class="lang-btn {% if lang == l.code %}active{% endif %}">
-                    {{ l.label }}
-                </a>
-            {% endfor %}
+        <div class="brand-group">
+            <img src="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}"
+                 alt="{{ t.candidate_name }}"
+                 class="brand-avatar">
+            <div class="brand-meta">
+                <span class="brand-name">{{ t.candidate_name }}</span>
+                <span class="brand-party">{{ t.candidate_party }}</span>
+                <span class="brand-seat">{{ t.candidate_seat }}</span>
+                <span class="brand-app-inline">{{ t.app_title }}</span>
+            </div>
         </div>
+
+        <span class="topbar-divider" aria-hidden="true"></span>
+
+        <span class="brand-app">{{ t.app_title }}</span>
+
+        {% set current_lang = (languages | selectattr('code', 'equalto', lang) | first) %}
+        <details class="lang-dropdown">
+            <summary class="lang-dropdown-toggle">
+                <span class="lang-dropdown-current">{{ current_lang.label }}</span>
+                <span class="lang-dropdown-caret" aria-hidden="true">▾</span>
+            </summary>
+            <ul class="lang-dropdown-menu">
+                {% for l in languages %}
+                    <li>
+                        <a href="{{ url_for('set_language', code=l.code) }}"
+                           class="lang-dropdown-item {% if lang == l.code %}active{% endif %}">
+                            {{ l.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </details>
     </header>
     {% endblock %}
 

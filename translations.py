@@ -11,7 +11,10 @@ TRANSLATIONS = {
         # ── Candidate chip (navbar, all pages) ──
         "candidate_name": "Chandubhai Navasubhai Patel",
         "candidate_role": "Ambheti Seat · AAP",
-        "vote_date": "Vote: 26 April",
+        "candidate_party": "Aam Aadmi Party",
+        "candidate_seat": "District Panchayat Seat – Ambheti (Valsad)",
+        # English app title is broken to two lines so it stacks neatly in the navbar
+        # alongside the longer English candidate name. Hindi & Gujarati stay one line.
 
         # ── Landing ──
         "hire": "HIRE",
@@ -75,7 +78,8 @@ TRANSLATIONS = {
         # ── Candidate chip (navbar, all pages) ──
         "candidate_name": "चंदुभाई नवसुभाई पटेल",
         "candidate_role": "अंभेटी सीट · आप",
-        "vote_date": "मतदान: २६ अप्रैल",
+        "candidate_party": "आम आदमी पार्टी",
+        "candidate_seat": "ज़िला पंचायत सीट – अंभेटी (वलसाड)",
 
         # ── Landing ──
         "hire": "काम करवाना है",
@@ -139,7 +143,8 @@ TRANSLATIONS = {
         # ── Candidate chip (navbar, all pages) ──
         "candidate_name": "ચંદુભાઈ નવસુભાઈ પટેલ",
         "candidate_role": "અંભેટી બેઠક · આપ",
-        "vote_date": "મતદાન: ૨૬ એપ્રિલ",
+        "candidate_party": "આમ આદમી પાર્ટી",
+        "candidate_seat": "જિલ્લા પંચાયત બેઠક – અંભેટી (વલસાડ)",
 
         # ── Landing ──
         "hire": "કામ કરાવવું છે",
