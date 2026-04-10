@@ -179,6 +179,12 @@ def submit():
     )
 
 
+@app.route("/privacy")
+def privacy():
+    """Full privacy notice — linked from the footer of every page."""
+    return render_template("privacy.html")
+
+
 @app.route("/directory")
 def directory():
     """View registered workers (for hirers to browse)."""

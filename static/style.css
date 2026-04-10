@@ -960,6 +960,105 @@ body:has(.register-page) .back-btn-overlay {
     transform: scale(0.98);
 }
 
+.privacy-notice {
+    margin: 16px 4px 0;
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 500;
+    color: #3a2615;
+    text-align: center;
+}
+
+/* ══════════════════════════════════════════
+   PRIVACY PAGE
+   ══════════════════════════════════════════ */
+.privacy-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+    color: #2a1a0e;
+}
+
+.privacy-page .back-btn {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #4a2f1c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.privacy-content {
+    background: rgba(255, 248, 235, 0.92);
+    border: 1px solid rgba(74, 47, 28, 0.15);
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 18px rgba(74, 47, 28, 0.08);
+}
+
+.privacy-title {
+    margin: 0 0 14px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #2a1a0e;
+    text-align: center;
+}
+
+.privacy-intro {
+    margin: 0 0 22px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #3a2615;
+    text-align: center;
+}
+
+.privacy-section {
+    margin: 18px 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(74, 47, 28, 0.12);
+}
+
+.privacy-section h2 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #4a2f1c;
+}
+
+.privacy-section p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #3a2615;
+}
+
+.privacy-contact {
+    margin: 12px 0 0 !important;
+    text-align: center;
+}
+
+.privacy-contact a {
+    display: inline-block;
+    padding: 10px 22px;
+    background: linear-gradient(180deg, #5a3520 0%, #3d2517 100%);
+    color: #fff8eb;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+.privacy-updated {
+    margin: 22px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid rgba(74, 47, 28, 0.12);
+    font-size: 12px;
+    color: rgba(74, 47, 28, 0.7);
+    text-align: center;
+    font-style: italic;
+}
+
 /* ══════════════════════════════════════════
    SUCCESS PAGE
    ══════════════════════════════════════════ */

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="privacy-page">
+    <a href="{{ url_for('home') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+
+    <article class="privacy-content">
+        <h1 class="privacy-title">{{ t.privacy_page_title }}</h1>
+
+        <p class="privacy-intro">{{ t.privacy_page_intro }}</p>
+
+        {% for i in range(1, 10) %}
+        <section class="privacy-section">
+            <h2>{{ t['privacy_p' ~ i ~ '_title'] }}</h2>
+            <p>{{ t['privacy_p' ~ i ~ '_body'] }}</p>
+            {% if i == 9 %}
+            <p class="privacy-contact">
+                <a href="mailto:{{ t.privacy_contact }}">{{ t.privacy_contact }}</a>
+            </p>
+            {% endif %}
+        </section>
+        {% endfor %}
+
+        <p class="privacy-updated">{{ t.privacy_updated }}</p>
+    </article>
+</section>
+{% endblock %}
