@@ -48,7 +48,23 @@ def append_registration(entry):
         "start_time": entry.get("start_time", ""),
     }
 
-    response = requests.post(url, json=payload, timeout=REQUEST_TIMEOUT_SECONDS)
+    # Apps Script /exec returns a 302 to script.googleusercontent.com.
+    # requests downgrades POST → GET on 302, which makes doPost never fire,
+    # so we follow the redirect manually and re-POST the JSON body.
+    response = requests.post(
+        url,
+        json=payload,
+        timeout=REQUEST_TIMEOUT_SECONDS,
+        allow_redirects=False,
+    )
+    while response.is_redirect or response.is_permanent_redirect:
+        next_url = response.headers["Location"]
+        response = requests.post(
+            next_url,
+            json=payload,
+            timeout=REQUEST_TIMEOUT_SECONDS,
+            allow_redirects=False,
+        )
     response.raise_for_status()
     return True
 

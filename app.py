@@ -26,6 +26,12 @@ def inject_asset_version():
     except OSError:
         return {"asset_v": "0"}
 
+
+@app.context_processor
+def inject_analytics():
+    """Expose the GA4 Measurement ID to templates so the snippet can render."""
+    return {"ga_measurement_id": os.environ.get("GA_MEASUREMENT_ID", "")}
+
 # Use a writable location for the JSON database. On DigitalOcean App Platform
 # the working directory is read-only at runtime; mount /tmp or set DB_PATH.
 DB_FILE = os.environ.get("DB_PATH", "db.json")
