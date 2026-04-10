@@ -11,6 +11,9 @@
 
     <title>{{ t.app_title }}</title>
 
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">
+
     <!-- Google Fonts: Plus Jakarta Sans (Latin) + Hind (Devanagari) + Hind Vadodara (Gujarati) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -127,8 +127,8 @@ a {
     /* visible padding all around */
     border-radius: 6px;
     /* slight rounding so the framed photo looks polished */
-    object-fit: cover;
-    object-position: center 18%;
+    object-fit: contain;
+    object-position: center;
     flex-shrink: 0;
     background: transparent;
     display: block;
