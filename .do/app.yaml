@@ -26,6 +26,13 @@ services:
       - key: FLASK_ENV
         scope: RUN_TIME
         value: production
+      - key: APPS_SCRIPT_URL
+        scope: RUN_TIME
+        type: SECRET
+        value: CHANGE_ME_AFTER_DEPLOY
+      - key: GA_MEASUREMENT_ID
+        scope: RUN_TIME
+        value: CHANGE_ME_AFTER_DEPLOY
 
     routes:
       - path: /
