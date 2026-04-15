@@ -154,11 +154,19 @@
         if (sessionStorage.getItem('kaam_setu_video_shown')) return;
         sessionStorage.setItem('kaam_setu_video_shown', '1');
         modal.classList.add('open');
-        video.muted = true;
         video.currentTime = 0;
-        overlay.classList.remove('hidden');
+        video.muted = false;
+        video.volume = 1;
+        overlay.classList.add('hidden');
         var p = video.play();
-        if (p && p.catch) p.catch(function() {});
+        if (p && p.catch) {
+            p.catch(function() {
+                video.muted = true;
+                overlay.classList.remove('hidden');
+                var p2 = video.play();
+                if (p2 && p2.catch) p2.catch(function() {});
+            });
+        }
     })();
     </script>
 </body>
