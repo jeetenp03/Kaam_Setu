@@ -159,14 +159,7 @@
         video.volume = 1;
         overlay.classList.add('hidden');
         var p = video.play();
-        if (p && p.catch) {
-            p.catch(function() {
-                video.muted = true;
-                overlay.classList.remove('hidden');
-                var p2 = video.play();
-                if (p2 && p2.catch) p2.catch(function() {});
-            });
-        }
+        if (p && p.catch) p.catch(function() {});
     })();
     </script>
 </body>
