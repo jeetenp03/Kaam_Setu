@@ -1095,7 +1095,22 @@ body:has(.register-page) .back-btn-overlay {
 #video-modal .appeal-modal-inner {
     max-width: 720px;
     background: #000;
-    padding: 40px 8px 8px;
+    padding: 8px;
+}
+
+#video-modal .appeal-modal-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    font-size: 20px;
+    z-index: 6;
+}
+
+#video-modal .appeal-modal-close:hover {
+    background: rgba(200, 56, 31, 0.9);
 }
 
 .video-wrap {
