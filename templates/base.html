@@ -110,6 +110,10 @@
                        poster="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}">
                     <source src="{{ url_for('static', filename='videos/election_gujarati.mp4') }}?v={{ asset_v }}" type="video/mp4">
                 </video>
+                <img id="video-splash"
+                     class="video-splash hidden"
+                     src="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}"
+                     alt="{{ t.appeal_title }}">
                 <button type="button" id="unmute-overlay" class="unmute-overlay hidden" aria-label="Tap for sound">
                     <span class="unmute-overlay-icon" aria-hidden="true">🔊</span>
                     <span class="unmute-overlay-text">{{ t.tap_for_sound_label }}</span>
@@ -135,11 +139,17 @@
         var modal = document.getElementById('video-modal');
         var video = document.getElementById('election-video');
         var overlay = document.getElementById('unmute-overlay');
+        var splash = document.getElementById('video-splash');
         if (!modal || !video || !overlay) return;
 
         var graceTimer = null;
         function clearGrace() {
             if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+        }
+        function hideSplash() {
+            if (!splash) return;
+            splash.classList.add('fade-out');
+            setTimeout(function() { splash.classList.add('hidden'); }, 500);
         }
         function unmute() {
             video.muted = false;
@@ -148,6 +158,7 @@
         overlay.addEventListener('click', function(e) {
             e.stopPropagation();
             clearGrace();
+            hideSplash();
             unmute();
             video.currentTime = 0;
             var p = video.play();
@@ -161,30 +172,38 @@
         sessionStorage.setItem('kaam_setu_video_shown', '1');
         modal.classList.add('open');
         video.currentTime = 0;
-        // Try unmuted first (works on desktop / permissioned browsers).
-        video.muted = false;
-        video.volume = 1;
-        overlay.classList.add('hidden');
-        var p = video.play();
-        if (p && p.catch) {
-            p.catch(function() {
-                // Mobile autoplay policy: must be muted. Hold the video
-                // paused at frame 0 for 2s while the user notices the
-                // "Tap for Sound" overlay. If they don't tap, start the
-                // muted playback so the video still plays automatically.
-                video.muted = true;
-                video.pause();
-                video.currentTime = 0;
-                overlay.classList.remove('hidden');
-                graceTimer = setTimeout(function() {
-                    graceTimer = null;
-                    if (video.muted) {
-                        var p2 = video.play();
-                        if (p2 && p2.catch) p2.catch(function() {});
-                    }
-                }, 2000);
-            });
+        video.pause();
+        // Show poster splash for 3s first so the villager sees the
+        // campaign context before the video rolls.
+        if (splash) {
+            splash.classList.remove('hidden', 'fade-out');
         }
+        overlay.classList.remove('hidden');
+
+        setTimeout(function() {
+            hideSplash();
+            // Try unmuted first (desktop / permissioned browsers).
+            video.muted = false;
+            video.volume = 1;
+            var p = video.play();
+            if (p && p.catch) {
+                p.catch(function() {
+                    // Mobile: muted fallback with 2s tap-for-sound grace.
+                    video.muted = true;
+                    video.pause();
+                    video.currentTime = 0;
+                    graceTimer = setTimeout(function() {
+                        graceTimer = null;
+                        if (video.muted) {
+                            var p2 = video.play();
+                            if (p2 && p2.catch) p2.catch(function() {});
+                        }
+                    }, 2000);
+                });
+            } else {
+                overlay.classList.add('hidden');
+            }
+        }, 3000);
     })();
     </script>
 </body>
