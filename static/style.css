@@ -459,7 +459,6 @@ a {
 }
 
 .back-btn:active {
-    transform: scale(0.95);
     background: rgba(212, 160, 106, 0.15);
 }
 
@@ -474,7 +473,6 @@ a {
 }
 
 .back-btn:active {
-    transform: scale(0.95);
     background: #fef5e7;
 }
 
@@ -977,6 +975,230 @@ body:has(.register-page) .back-btn-overlay {
     margin: 0 auto;
     padding: 24px 20px 60px;
     color: #2a1a0e;
+}
+
+.appeal-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: #3a2418;
+    border: none;
+    border-top: 1px solid rgba(212, 160, 106, 0.2);
+    border-bottom: 1px solid rgba(212, 160, 106, 0.2);
+    padding: 11px 16px;
+    margin: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: #e8b774;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: filter 0.15s ease;
+}
+
+.appeal-banner:hover,
+.appeal-banner:focus-visible {
+    filter: brightness(1.08);
+    outline: none;
+}
+
+.appeal-banner-text {
+    text-decoration: underline;
+    text-decoration-color: rgba(232, 183, 116, 0.45);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
+
+.appeal-banner:hover .appeal-banner-text {
+    text-decoration-color: currentColor;
+}
+
+.appeal-banner-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.appeal-banner-arrow {
+    font-size: 1.3rem;
+    line-height: 1;
+    font-weight: 400;
+    transition: transform 0.15s ease;
+}
+
+.appeal-banner:hover .appeal-banner-arrow {
+    transform: translateX(3px);
+}
+
+@media (max-width: 640px) {
+    .appeal-banner {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+.appeal-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.82);
+    padding: 24px 16px;
+    overflow-y: auto;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.appeal-modal.open {
+    display: flex;
+}
+
+.appeal-modal-inner {
+    position: relative;
+    max-width: 860px;
+    width: 100%;
+    background: #fff8eb;
+    border-radius: 14px;
+    padding: 46px 14px 14px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+.appeal-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #5c3317;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.appeal-modal-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 120px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: #000;
+}
+
+#video-modal .appeal-modal-inner {
+    max-width: 720px;
+    background: #000;
+    padding: 40px 8px 8px;
+}
+
+
+.appeal-row {
+    background: #3a2418;
+    border-top: 1px solid rgba(212, 160, 106, 0.2);
+    border-bottom: 1px solid rgba(212, 160, 106, 0.2);
+    padding: 12px 16px;
+}
+
+.appeal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border: 1.5px solid rgba(212, 160, 106, 0.55);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f5e6c8;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.action-btn:hover,
+.action-btn:focus {
+    background: rgba(212, 160, 106, 0.2);
+    border-color: rgba(212, 160, 106, 0.9);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn-video {
+    background: linear-gradient(135deg, #d4a06a 0%, #c8381f 100%);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    animation: action-btn-pulse 2.4s ease-in-out infinite;
+}
+
+.action-btn-video:hover,
+.action-btn-video:focus {
+    background: linear-gradient(135deg, #e0ad78 0%, #d84327 100%);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.action-btn-icon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.action-btn-icon-play {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    color: #c8381f;
+    font-size: 9px;
+    padding-left: 2px;
+}
+
+@keyframes action-btn-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(200, 56, 31, 0.45);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(200, 56, 31, 0);
+    }
+}
+
+@media (max-width: 480px) {
+    .appeal-row {
+        padding: 8px 10px 10px;
+    }
+    .action-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+.appeal-modal-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .privacy-page .back-btn {

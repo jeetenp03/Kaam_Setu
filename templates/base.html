@@ -71,6 +71,48 @@
     </header>
     {% endblock %}
 
+    {% block banner %}
+    <div class="appeal-row">
+        <div class="appeal-actions">
+            <button type="button" class="action-btn action-btn-poster"
+                    onclick="document.getElementById('appeal-modal').classList.add('open')">
+                <span class="action-btn-icon" aria-hidden="true">📄</span>
+                <span class="action-btn-text">{{ t.view_poster_label }}</span>
+            </button>
+            <button type="button" class="action-btn action-btn-video"
+                    onclick="var m=document.getElementById('video-modal');m.classList.add('open');var v=document.getElementById('election-video');v.muted=false;v.currentTime=0;v.play().catch(function(){});">
+                <span class="action-btn-icon action-btn-icon-play" aria-hidden="true">▶</span>
+                <span class="action-btn-text">{{ t.watch_video_label }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="appeal-modal" class="appeal-modal" onclick="if(event.target===this)this.classList.remove('open')">
+        <div class="appeal-modal-inner">
+            <button type="button" class="appeal-modal-close" aria-label="Close"
+                    onclick="document.getElementById('appeal-modal').classList.remove('open')">&times;</button>
+            <img src="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}"
+                 alt="{{ t.appeal_title }}"
+                 class="appeal-modal-img">
+        </div>
+    </div>
+
+    <div id="video-modal" class="appeal-modal" onclick="if(event.target===this){this.classList.remove('open');document.getElementById('election-video').pause();}">
+        <div class="appeal-modal-inner">
+            <button type="button" class="appeal-modal-close" aria-label="Close"
+                    onclick="document.getElementById('video-modal').classList.remove('open');document.getElementById('election-video').pause();">&times;</button>
+            <video id="election-video"
+                   class="appeal-modal-video"
+                   controls
+                   playsinline
+                   preload="metadata"
+                   poster="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}">
+                <source src="{{ url_for('static', filename='videos/election_gujarati.mp4') }}?v={{ asset_v }}" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    {% endblock %}
+
     {% block content %}{% endblock %}
 
     <footer class="designer-credit" aria-label="Designer credit">
@@ -81,5 +123,24 @@
         <span class="designer-credit-sep" aria-hidden="true">·</span>
         <a href="https://www.linkedin.com/in/jeetenp03/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </footer>
+
+    <script>
+    (function() {
+        if (sessionStorage.getItem('kaam_setu_video_shown')) return;
+        var modal = document.getElementById('video-modal');
+        var video = document.getElementById('election-video');
+        if (!modal || !video) return;
+        sessionStorage.setItem('kaam_setu_video_shown', '1');
+        modal.classList.add('open');
+        video.muted = true;
+        video.currentTime = 0;
+        var p = video.play();
+        if (p && p.catch) p.catch(function() {});
+        modal.addEventListener('click', function onFirstTap() {
+            video.muted = false;
+            modal.removeEventListener('click', onFirstTap);
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -13,7 +13,7 @@ except ImportError:
 from translations import TRANSLATIONS, LANGUAGES
 from sheets import append_registration, fetch_workers
 
-app = Flask(__name__)
+app            = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "village-hire-dev-key-change-in-production")
 
 
@@ -85,11 +85,13 @@ def inject_translations():
     lang = session.get("lang", DEFAULT_LANG)
     if lang not in TRANSLATIONS:
         lang = DEFAULT_LANG
+    poster = "Poster (English).jpg" if lang == "en" else "Poster (Gujarati).png"
     return {
         "t": TRANSLATIONS[lang],
         "lang": lang,
         "languages": LANGUAGES,
         "category_images": CATEGORY_IMAGES,
+        "banner_poster": poster,
     }
 
 
