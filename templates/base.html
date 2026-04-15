@@ -137,12 +137,17 @@
         var overlay = document.getElementById('unmute-overlay');
         if (!modal || !video || !overlay) return;
 
+        var graceTimer = null;
+        function clearGrace() {
+            if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+        }
         function unmute() {
             video.muted = false;
             overlay.classList.add('hidden');
         }
         overlay.addEventListener('click', function(e) {
             e.stopPropagation();
+            clearGrace();
             unmute();
             video.currentTime = 0;
             var p = video.play();
@@ -157,18 +162,27 @@
         modal.classList.add('open');
         video.currentTime = 0;
         // Try unmuted first (works on desktop / permissioned browsers).
-        // If browser rejects, fall back to muted autoplay and show the
-        // "Tap for Sound" overlay so one tap turns audio on.
         video.muted = false;
         video.volume = 1;
         overlay.classList.add('hidden');
         var p = video.play();
         if (p && p.catch) {
             p.catch(function() {
+                // Mobile autoplay policy: must be muted. Hold the video
+                // paused at frame 0 for 2s while the user notices the
+                // "Tap for Sound" overlay. If they don't tap, start the
+                // muted playback so the video still plays automatically.
                 video.muted = true;
+                video.pause();
+                video.currentTime = 0;
                 overlay.classList.remove('hidden');
-                var p2 = video.play();
-                if (p2 && p2.catch) p2.catch(function() {});
+                graceTimer = setTimeout(function() {
+                    graceTimer = null;
+                    if (video.muted) {
+                        var p2 = video.play();
+                        if (p2 && p2.catch) p2.catch(function() {});
+                    }
+                }, 2000);
             });
         }
     })();
