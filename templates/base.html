@@ -144,6 +144,7 @@
         overlay.addEventListener('click', function(e) {
             e.stopPropagation();
             unmute();
+            video.currentTime = 0;
             var p = video.play();
             if (p && p.catch) p.catch(function() {});
         });
