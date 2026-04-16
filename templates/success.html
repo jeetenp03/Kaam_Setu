@@ -15,4 +15,13 @@
     </p>
     <a href="{{ url_for('home') }}" class="home-btn">&#x1F3E0; {{ t.home }}</a>
 </div>
+
+{% if ga_measurement_id %}
+<script>
+    gtag('event', 'sign_up', {
+        method: '{{ role }}',
+        category: '{{ category }}'
+    });
+</script>
+{% endif %}
 {% endblock %}

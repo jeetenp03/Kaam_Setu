@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 import json
 import os
+import re
+import time
+from collections import defaultdict
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         # Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         # available without exporting them by hand on every run.
@@ -51,6 +54,29 @@ CATEGORY_IMAGES = {
     "cook"        : "cook.png",
     "farming"     : "farmer.png",
 }
+
+VALID_CATEGORIES = set(CATEGORY_IMAGES.keys())
+VALID_ROLES = {"worker", "hire"}
+PHONE_RE = re.compile(r"^\d{10}$")
+
+# ──────────────────────────────────────────────
+#  RATE LIMITING (in-memory, per IP)
+# ──────────────────────────────────────────────
+_submit_log = defaultdict(list)  # IP → list of timestamps
+RATE_LIMIT = 5        # max submissions
+RATE_WINDOW = 300     # per 5 minutes
+
+
+def _is_rate_limited(ip):
+    """Return True if this IP has exceeded the submit rate limit."""
+    now = time.time()
+    times = _submit_log[ip]
+    # Prune old entries
+    _submit_log[ip] = [t for t in times if now - t < RATE_WINDOW]
+    if len(_submit_log[ip]) >= RATE_LIMIT:
+        return True
+    _submit_log[ip].append(now)
+    return False
 
 
 def load_db():
@@ -134,13 +160,29 @@ def register(role, category):
 @app.route("/submit", methods=["POST"])
 def submit():
     """Handle registration form submission."""
+    # Rate limit by IP
+    if _is_rate_limited(request.remote_addr):
+        abort(429)
+
     entry = {
-        "name": request.form.get("name", ""),
-        "phone": request.form.get("phone", ""),
-        "village": request.form.get("village", ""),
-        "category": request.form.get("category", ""),
-        "role": request.form.get("role", ""),
+        "name": request.form.get("name", "").strip(),
+        "phone": request.form.get("phone", "").strip(),
+        "village": request.form.get("village", "").strip(),
+        "category": request.form.get("category", "").strip(),
+        "role": request.form.get("role", "").strip(),
     }
+
+    # Server-side validation
+    if not entry["name"] or len(entry["name"]) < 2:
+        abort(400)
+    if not PHONE_RE.match(entry["phone"]):
+        abort(400)
+    if not entry["village"]:
+        abort(400)
+    if entry["category"] not in VALID_CATEGORIES:
+        abort(400)
+    if entry["role"] not in VALID_ROLES:
+        abort(400)
 
     if entry["role"] != "worker":
         # Hirer-only job details
