@@ -49,6 +49,8 @@ TRANSLATIONS = {
         "num_days": "Number of Days",
         "num_days_placeholder": "How many days",
         "start_time": "Start Time",
+        "agree_terms": "I agree to the",
+        "terms_link": "Terms & Privacy Policy",
 
         # ── Privacy notice (shown under the submit button) ──
         "privacy_notice"     : "This is a preview of Kaam Setu. Your details are safe with us \u2014 they will only be shared with employers once the full service begins.",
@@ -77,8 +79,10 @@ TRANSLATIONS = {
         "privacy_p7_body"    : "Send an email to the Kaam Setu team at the address listed below with your name and village. We will confirm and delete your record.",
         "privacy_p8_title"   : "8. Children",
         "privacy_p8_body"    : "Kaam Setu is meant for people aged 18 and above. We do not knowingly register anyone under 18.",
-        "privacy_p9_title"   : "9. Contact us",
-        "privacy_p9_body"    : "For any question about your data, or to remove your information, contact the Kaam Setu team:",
+        "privacy_p9_title"   : "9. Disclaimer — No Liability",
+        "privacy_p9_body"    : "Kaam Setu is only a bridge that connects workers and hirers. We do not guarantee the quality of work, payment, attendance, or behaviour of any party. All agreements regarding wages, working hours, safety, and job terms are strictly between the worker and the hirer. Kaam Setu holds no responsibility or liability for any disputes, damages, injuries, non-payment, or losses arising from any engagement made through this platform.",
+        "privacy_p10_title"  : "10. Contact us",
+        "privacy_p10_body"   : "For any question about your data, or to remove your information, contact the Kaam Setu team:",
         "privacy_contact"    : "jeetenp03@gmail.com",
         "privacy_updated"    : "Last updated: April 2026",
 
@@ -86,6 +90,16 @@ TRANSLATIONS = {
         "done"              : "Done!",
         "worker_registered" : "You are now registered as a {category}.",
         "request_posted"    : "Your hire request for {category} has been posted.",
+
+        # ── Worker Selection ──
+        "select_workers_title": "Select Workers",
+        "select_workers_subtitle": "Choose up to {count} {category} workers",
+        "selected": "selected",
+        "confirm_selection": "CONFIRM SELECTION",
+        "no_workers_category": "No workers available in this category yet.",
+        "workers_selected": "{count} {category} workers selected!",
+        "workers_selected_short": "Selected Workers",
+        "share_whatsapp": "Share via WhatsApp",
 
         # ── Directory ──
         "no_workers": "No workers registered yet.",
@@ -147,6 +161,8 @@ TRANSLATIONS = {
         "num_days": "कितने दिन",
         "num_days_placeholder": "दिनों की संख्या",
         "start_time": "किस समय",
+        "agree_terms": "मैं सहमत हूँ",
+        "terms_link": "शर्तें और गोपनीयता नीति",
 
         # ── Privacy notice (shown under the submit button) ──
         "privacy_notice": "यह काम सेतु की झलक है। आपकी जानकारी हमारे पास सुरक्षित है \u2014 पूरी सेवा शुरू होने पर ही काम देने वालों को दी जाएगी।",
@@ -175,8 +191,10 @@ TRANSLATIONS = {
         "privacy_p7_body": "नीचे दिए गए ईमेल पते पर काम सेतु टीम को ईमेल भेजें, अपना नाम और गाँव बताएं। हम पुष्टि करके आपकी जानकारी हटा देंगे।",
         "privacy_p8_title": "८. बच्चे",
         "privacy_p8_body": "काम सेतु १८ साल और उससे ऊपर के लोगों के लिए है। हम जानबूझकर १८ से कम उम्र के किसी का रजिस्ट्रेशन नहीं करते।",
-        "privacy_p9_title": "९. हमसे संपर्क करें",
-        "privacy_p9_body": "अपने डेटा के बारे में किसी भी सवाल के लिए, या अपनी जानकारी हटवाने के लिए, काम सेतु टीम से संपर्क करें:",
+        "privacy_p9_title": "९. अस्वीकरण — कोई ज़िम्मेदारी नहीं",
+        "privacy_p9_body": "काम सेतु सिर्फ़ एक पुल है जो मज़दूरों और काम देने वालों को जोड़ता है। हम काम की गुणवत्ता, भुगतान, हाज़िरी, या किसी भी पक्ष के व्यवहार की गारंटी नहीं देते। मज़दूरी, काम के घंटे, सुरक्षा और शर्तों से जुड़े सभी समझौते पूरी तरह मज़दूर और काम देने वाले के बीच हैं। काम सेतु इस प्लेटफ़ॉर्म के ज़रिए हुए किसी भी विवाद, नुकसान, चोट, भुगतान न होने, या हानि के लिए कोई ज़िम्मेदारी नहीं लेता।",
+        "privacy_p10_title": "१०. हमसे संपर्क करें",
+        "privacy_p10_body": "अपने डेटा के बारे में किसी भी सवाल के लिए, या अपनी जानकारी हटवाने के लिए, काम सेतु टीम से संपर्क करें:",
         "privacy_contact": "jeetenp03@gmail.com",
         "privacy_updated": "अंतिम बार अपडेट: अप्रैल २०२६",
 
@@ -184,6 +202,16 @@ TRANSLATIONS = {
         "done": "हो गया!",
         "worker_registered": "आपका नाम {category} के रूप में जुड़ गया है।",
         "request_posted": "{category} के लिए आपकी ज़रूरत दर्ज हो गई है।",
+
+        # ── Worker Selection ──
+        "select_workers_title": "मज़दूर चुनें",
+        "select_workers_subtitle": "{count} {category} मज़दूर चुनें",
+        "selected": "चुने गए",
+        "confirm_selection": "पक्का करें",
+        "no_workers_category": "इस श्रेणी में अभी कोई मज़दूर नहीं है।",
+        "workers_selected": "{count} {category} मज़दूर चुने गए!",
+        "workers_selected_short": "चुने गए मज़दूर",
+        "share_whatsapp": "WhatsApp पर भेजें",
 
         # ── Directory ──
         "no_workers": "अभी कोई मज़दूर नहीं है।",
@@ -245,6 +273,8 @@ TRANSLATIONS = {
         "num_days": "કેટલા દિવસ",
         "num_days_placeholder": "દિવસોની સંખ્યા",
         "start_time": "કયા સમયે",
+        "agree_terms": "હું સંમત છું",
+        "terms_link": "શરતો અને ગોપનીયતા નીતિ",
 
         # ── Privacy notice (shown under the submit button) ──
         "privacy_notice": "આ કામ સેતુની ઝલક છે. તમારી માહિતી અમારી પાસે સુરક્ષિત છે \u2014 પૂર્ણ સેવા શરૂ થયા પછી જ કામ આપનારને આપવામાં આવશે.",
@@ -273,8 +303,10 @@ TRANSLATIONS = {
         "privacy_p7_body": "નીચે આપેલા ઈમેલ સરનામા પર કામ સેતુ ટીમને ઈમેલ મોકલો, તમારું નામ અને ગામ જણાવો. અમે ખાતરી કરીને તમારી માહિતી હટાવી દઈશું.",
         "privacy_p8_title": "૮. બાળકો",
         "privacy_p8_body": "કામ સેતુ ૧૮ વર્ષ અને તેથી મોટી ઉંમરના લોકો માટે છે. અમે જાણીજોઈને ૧૮ વર્ષથી ઓછી ઉંમરના કોઈનું રજિસ્ટ્રેશન કરતા નથી.",
-        "privacy_p9_title": "૯. અમારો સંપર્ક કરો",
-        "privacy_p9_body": "તમારા ડેટા વિશે કોઈપણ પ્રશ્ન માટે, અથવા તમારી માહિતી હટાવવા માટે, કામ સેતુ ટીમનો સંપર્ક કરો:",
+        "privacy_p9_title": "૯. અસ્વીકરણ — કોઈ જવાબદારી નહીં",
+        "privacy_p9_body": "કામ સેતુ ફક્ત એક પુલ છે જે મજૂરો અને કામ આપનારાઓને જોડે છે. અમે કામની ગુણવત્તા, ચૂકવણી, હાજરી, કે કોઈ પણ પક્ષના વર્તનની ખાતરી આપતા નથી. મજૂરી, કામના કલાકો, સુરક્ષા અને શરતો અંગેના તમામ કરારો સંપૂર્ણપણે મજૂર અને કામ આપનાર વચ્ચેના છે. કામ સેતુ આ પ્લેટફોર્મ દ્વારા થયેલા કોઈપણ વિવાદ, નુકસાન, ઈજા, ચૂકવણી ન થવી, કે હાનિ માટે કોઈ જવાબદારી લેતું નથી.",
+        "privacy_p10_title": "૧૦. અમારો સંપર્ક કરો",
+        "privacy_p10_body": "તમારા ડેટા વિશે કોઈપણ પ્રશ્ન માટે, અથવા તમારી માહિતી હટાવવા માટે, કામ સેતુ ટીમનો સંપર્ક કરો:",
         "privacy_contact": "jeetenp03@gmail.com",
         "privacy_updated": "છેલ્લે અપડેટ: એપ્રિલ ૨૦૨૬",
 
@@ -282,6 +314,16 @@ TRANSLATIONS = {
         "done": "થઈ ગયું!",
         "worker_registered": "તમારું નામ {category} તરીકે જોડાઈ ગયું છે.",
         "request_posted": "{category} માટે તમારી જરૂરિયાત નોંધાઈ ગઈ છે.",
+
+        # ── Worker Selection ──
+        "select_workers_title": "મજૂર પસંદ કરો",
+        "select_workers_subtitle": "{count} {category} મજૂર પસંદ કરો",
+        "selected": "પસંદ કરેલા",
+        "confirm_selection": "પસંદગી પાક્કી કરો",
+        "no_workers_category": "આ શ્રેણીમાં હજુ કોઈ મજૂર નથી.",
+        "workers_selected": "{count} {category} મજૂર પસંદ થયા!",
+        "workers_selected_short": "પસંદ કરેલા મજૂર",
+        "share_whatsapp": "WhatsApp પર મોકલો",
 
         # ── Directory ──
         "no_workers": "હજુ કોઈ મજૂર નથી.",

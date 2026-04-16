@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="select-workers-page">
+    <a href="{{ url_for('hire_categories') }}" class="back-btn">&#x2190; {{ t.back }}</a>
+
+    <h2 class="select-title">{{ t.select_workers_title }}</h2>
+    <p class="select-subtitle">
+        {{ t.select_workers_subtitle.format(count=workers_needed, category=t[category] if category in t else category) }}
+    </p>
+
+    {% if workers %}
+    <div class="select-grid">
+        {% for w in workers %}
+        <div class="select-card" data-index="{{ loop.index0 }}" onclick="toggleSelect(this)">
+            <div class="select-check">&#x2714;</div>
+            <div class="select-img">
+                <img src="{{ url_for('static', filename='images/default-avatar.svg') }}" alt="">
+            </div>
+            <div class="select-bottom">
+                <h3 class="select-name">{{ w.name }}</h3>
+                <p class="select-village">{{ w.village }}</p>
+                <a href="tel:{{ w.phone }}" class="select-call-btn" onclick="event.stopPropagation()">&#x1F4DE; {{ t.phone }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form id="confirmForm" action="{{ url_for('hire_confirm', category=category) }}" method="POST">
+        <input type="hidden" name="selected" id="selectedInput" value="">
+    </form>
+
+    <div class="select-footer">
+        <div class="select-counter">
+            <span id="selectedCount">0</span> / {{ workers_needed }} {{ t.selected }}
+        </div>
+        <button class="submit-btn select-confirm-btn" id="confirmBtn" disabled onclick="confirmSelection()">
+            {{ t.confirm_selection }} &#x2714;
+        </button>
+    </div>
+    {% else %}
+    <div class="empty-state">{{ t.no_workers_category }}</div>
+    <a href="{{ url_for('home') }}" class="home-btn" style="margin-top:24px;">&#x1F3E0; {{ t.home }}</a>
+    {% endif %}
+</div>
+
+<script>
+(function() {
+    var maxSelect = {{ workers_needed }};
+    var selected = new Set();
+    var counter = document.getElementById('selectedCount');
+    var confirmBtn = document.getElementById('confirmBtn');
+
+    window.toggleSelect = function(card) {
+        var idx = card.dataset.index;
+        if (selected.has(idx)) {
+            selected.delete(idx);
+            card.classList.remove('selected');
+        } else {
+            if (selected.size >= maxSelect) return;
+            selected.add(idx);
+            card.classList.add('selected');
+        }
+        counter.textContent = selected.size;
+        confirmBtn.disabled = selected.size === 0;
+    };
+
+    window.confirmSelection = function() {
+        document.getElementById('selectedInput').value = Array.from(selected).join(',');
+        document.getElementById('confirmForm').submit();
+    };
+})();
+</script>
+{% endblock %}

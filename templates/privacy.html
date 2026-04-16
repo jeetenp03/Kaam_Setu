@@ -9,11 +9,11 @@
 
         <p class="privacy-intro">{{ t.privacy_page_intro }}</p>
 
-        {% for i in range(1, 10) %}
+        {% for i in range(1, 11) %}
         <section class="privacy-section">
             <h2>{{ t['privacy_p' ~ i ~ '_title'] }}</h2>
             <p>{{ t['privacy_p' ~ i ~ '_body'] }}</p>
-            {% if i == 9 %}
+            {% if i == 10 %}
             <p class="privacy-contact">
                 <a href="mailto:{{ t.privacy_contact }}">{{ t.privacy_contact }}</a>
             </p>

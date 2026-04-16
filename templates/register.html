@@ -43,6 +43,23 @@
                 <input type="hidden" name="role" value="{{ role }}">
                 <input type="hidden" name="category" value="{{ category }}">
 
+                {% if role == 'worker' %}
+                <div class="form-group">
+                    <label>{{ t.name }}</label>
+                    <input type="text" name="name" required placeholder="{{ t.name_placeholder }}">
+                </div>
+
+                <div class="form-group">
+                    <label>{{ t.phone }}</label>
+                    <input type="tel" name="phone" required placeholder="{{ t.phone_placeholder }}"
+                           pattern="[0-9]{10}" title="10 digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label>{{ t.village }}</label>
+                    <input type="text" name="village" required placeholder="{{ t.village_placeholder }}">
+                </div>
+                {% else %}
                 <div class="form-group">
                     <label>{{ t.name }}</label>
                     <input type="text" name="name" required placeholder="{{ t.name_placeholder }}">
@@ -59,31 +76,46 @@
                     <input type="text" name="village" required placeholder="{{ t.village_placeholder }}">
                 </div>
 
-                {% if role != 'worker' %}
                 <div class="form-group">
                     <label>{{ t.workers_needed }}</label>
-                    <input type="number" name="workers_needed" required min="1" max="999"
+                    <input type="number" name="workers_needed" required min="1" max="99"
                            placeholder="{{ t.workers_needed_placeholder }}">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>{{ t.start_date }}</label>
-                        <input type="date" name="start_date" required>
+                        <input type="date" name="start_date" required id="startDate">
                     </div>
 
                     <div class="form-group">
-                        <label>{{ t.num_days }}</label>
-                        <input type="number" name="num_days" required min="1" max="365"
-                               placeholder="{{ t.num_days_placeholder }}">
+                        <label>{{ t.start_time }}</label>
+                        <div class="time-picker-row">
+                            <select name="start_hour" required class="time-select">
+                                {% for h in range(1, 13) %}
+                                <option value="{{ h }}"{% if h == 9 %} selected{% endif %}>{{ h }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="time-colon">:</span>
+                            <select name="start_minute" required class="time-select">
+                                <option value="00">00</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                            </select>
+                            <select name="start_ampm" required class="time-select ampm-select">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>{{ t.start_time }}</label>
-                    <input type="time" name="start_time" required>
-                </div>
                 {% endif %}
+
+                <label class="agree-check">
+                    <input type="checkbox" required>
+                    <span>{{ t.agree_terms }} <a href="{{ url_for('privacy') }}" target="_blank">{{ t.terms_link }}</a></span>
+                </label>
 
                 <button type="submit" class="submit-btn">
                     {% if role == 'worker' %}
@@ -99,4 +131,13 @@
     </div>
 
 </section>
+{% if role != 'worker' %}
+<script>
+var d = new Date(), m = d.getMonth()+1, day = d.getDate();
+var today = d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(day<10?'0'+day:day);
+var dateInput = document.getElementById('startDate');
+dateInput.value = today;
+dateInput.min = today;
+</script>
+{% endif %}
 {% endblock %}

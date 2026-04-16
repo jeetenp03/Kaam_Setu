@@ -16,11 +16,15 @@ False so the caller can fall back to local JSON storage. The form on the
 ground never breaks.
 """
 
+import csv
+import io
 import os
 
 import requests
 
-REQUEST_TIMEOUT_SECONDS = 8
+REQUEST_TIMEOUT_SECONDS = 10
+
+GOOGLE_SHEET_ID = "1SZMGjcZWdC6qM7KTs6MteePCu4RwiVHiSu1s9_M4-7k"
 
 
 def append_registration(entry):
@@ -70,9 +74,23 @@ def append_registration(entry):
 
 
 def fetch_workers():
-    """Reading from the sheet is not supported via this backend.
+    """Fetch workers directly from Google Sheet as CSV. Fast, no Apps Script needed."""
+    sheet_id = os.environ.get("GOOGLE_SHEET_ID", GOOGLE_SHEET_ID)
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet=Workers"
 
-    Returns None so callers fall back to the local JSON store. The campaign
-    team views the live data by opening the Google Sheet directly.
-    """
-    return None
+    try:
+        response = requests.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
+        response.raise_for_status()
+        reader = csv.DictReader(io.StringIO(response.text))
+        workers = []
+        for row in reader:
+            # Normalize keys and category to lowercase
+            w = {k.lower().strip(): v.strip() for k, v in row.items()}
+            if "category" in w:
+                w["category"] = w["category"].lower()
+            workers.append(w)
+        print(f"[FETCH] got {len(workers)} workers from Google Sheet", flush=True)
+        return workers
+    except Exception as exc:
+        print(f"[FETCH] FAILED: {type(exc).__name__}: {exc}", flush=True)
+        return None

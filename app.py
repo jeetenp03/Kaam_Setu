@@ -5,8 +5,8 @@ import re
 import time
 from collections import defaultdict
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        # available without exporting them by hand on every run.
+# Auto-load .env so GOOGLE_SHEET_ID / GOOGLE_CREDS_FILE / SECRET_KEY are
+# available without exporting them by hand on every run.
 try : 
     from dotenv import load_dotenv
     load_dotenv()
@@ -63,7 +63,7 @@ PHONE_RE = re.compile(r"^\d{10}$")
 #  RATE LIMITING (in-memory, per IP)
 # ──────────────────────────────────────────────
 _submit_log = defaultdict(list)  # IP → list of timestamps
-RATE_LIMIT = 5        # max submissions
+RATE_LIMIT = 20       # max submissions
 RATE_WINDOW = 300     # per 5 minutes
 
 
@@ -164,32 +164,55 @@ def submit():
     if _is_rate_limited(request.remote_addr):
         abort(429)
 
-    entry = {
-        "name": request.form.get("name", "").strip(),
-        "phone": request.form.get("phone", "").strip(),
-        "village": request.form.get("village", "").strip(),
-        "category": request.form.get("category", "").strip(),
-        "role": request.form.get("role", "").strip(),
-    }
+    role = request.form.get("role", "").strip()
+    village = request.form.get("village", "").strip()
+    category = request.form.get("category", "").strip()
 
-    # Server-side validation
-    if not entry["name"] or len(entry["name"]) < 2:
+    if not village:
         abort(400)
-    if not PHONE_RE.match(entry["phone"]):
+    if category not in VALID_CATEGORIES:
         abort(400)
-    if not entry["village"]:
-        abort(400)
-    if entry["category"] not in VALID_CATEGORIES:
-        abort(400)
-    if entry["role"] not in VALID_ROLES:
+    if role not in VALID_ROLES:
         abort(400)
 
-    if entry["role"] != "worker":
-        # Hirer-only job details
-        entry["workers_needed"] = request.form.get("workers_needed", "")
-        entry["start_date"] = request.form.get("start_date", "")
-        entry["num_days"] = request.form.get("num_days", "")
-        entry["start_time"] = request.form.get("start_time", "")
+    if role == "worker":
+        name = request.form.get("name", "").strip()
+        phone = request.form.get("phone", "").strip()
+        if not name or len(name) < 2:
+            abort(400)
+        if not PHONE_RE.match(phone):
+            abort(400)
+        entry = {
+            "name": name,
+            "phone": phone,
+            "village": village,
+            "category": category,
+            "role": role,
+        }
+    else:
+        name = request.form.get("name", "").strip()
+        phone = request.form.get("phone", "").strip()
+        if not name or len(name) < 2:
+            abort(400)
+        if not PHONE_RE.match(phone):
+            abort(400)
+        workers_needed = request.form.get("workers_needed", "").strip()
+        if not workers_needed.isdigit() or int(workers_needed) < 1:
+            abort(400)
+        entry = {
+            "name": name,
+            "phone": phone,
+            "village": village,
+            "category": category,
+            "role": role,
+            "workers_needed": int(workers_needed),
+            "start_date": request.form.get("start_date", "").strip(),
+            "start_time": "{} {} {}".format(
+                request.form.get("start_hour", "").strip(),
+                request.form.get("start_minute", "00").strip(),
+                request.form.get("start_ampm", "AM").strip(),
+            ).strip(),
+        }
 
     # Primary store: Google Sheets (campaign team views registrations there).
     # Falls back to local JSON if Sheets is not configured or the call fails,
@@ -215,11 +238,64 @@ def submit():
     else:
         print("[SUBMIT] OK — wrote to Google Sheet", flush=True)
 
+    if role == "worker":
+        return render_template(
+            "success.html",
+            role=entry["role"],
+            name=entry.get("name", ""),
+            category=entry["category"],
+        )
+
+    # Hirer flow: show available workers for selection
+    workers = None
+    try:
+        workers = fetch_workers()
+    except Exception:
+        pass
+    if workers is None:
+        workers = load_db()["workers"]
+    print(f"[HIRE] total workers fetched: {len(workers)}", flush=True)
+    print(f"[HIRE] filtering for category: '{category}'", flush=True)
+    if workers:
+        cats = set(w.get("category", "???") for w in workers)
+        print(f"[HIRE] categories in data: {cats}", flush=True)
+    workers = [w for w in workers if w.get("category") == category]
+    print(f"[HIRE] matched workers: {len(workers)}", flush=True)
+
     return render_template(
-        "success.html",
-        role=entry["role"],
-        name=entry["name"],
-        category=entry["category"],
+        "select_workers.html",
+        workers=workers,
+        category=category,
+        workers_needed=entry["workers_needed"],
+    )
+
+
+@app.route("/hire-confirm/<category>", methods=["POST"])
+def hire_confirm(category):
+    """Confirmation page showing selected workers with WhatsApp share."""
+    selected_indices = request.form.get("selected", "")
+    indices = []
+    for s in selected_indices.split(","):
+        s = s.strip()
+        if s.isdigit():
+            indices.append(int(s))
+
+    # Fetch the same worker list to pick from
+    workers = None
+    try:
+        workers = fetch_workers()
+    except Exception:
+        pass
+    if workers is None:
+        workers = load_db()["workers"]
+    workers = [w for w in workers if w.get("category") == category]
+
+    chosen = [workers[i] for i in indices if i < len(workers)]
+
+    return render_template(
+        "hire_confirm.html",
+        chosen=chosen,
+        category=category,
     )
 
 
