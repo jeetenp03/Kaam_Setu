@@ -9,7 +9,21 @@
          the app has its own language switcher (gu / hi / en) -->
     <meta name="google" content="notranslate">
 
-    <title>{{ t.app_title }}</title>
+    <title>{{ t.app_title }} — {{ t.candidate_name }}</title>
+
+    <!-- Open Graph — WhatsApp / Facebook / Twitter rich preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ t.app_title }} — {{ t.candidate_name }}">
+    <meta property="og:description" content="{{ t.og_description }}">
+    <meta property="og:image" content="{{ request.url_root }}static/images/logo.png">
+    <meta property="og:locale" content="{{ lang }}">
+    <meta name="description" content="{{ t.og_description }}">
+
+    <!-- Twitter Card (also used by some apps) -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ t.app_title }} — {{ t.candidate_name }}">
+    <meta name="twitter:description" content="{{ t.og_description }}">
+    <meta name="twitter:image" content="{{ request.url_root }}static/images/logo.png">
 
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">

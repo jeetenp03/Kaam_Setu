@@ -6,6 +6,7 @@ TRANSLATIONS = {
     "en": {
         # ── App ──
         "app_title": "KAAM SETU",
+        "og_description": "Find workers or register for work in your village. A community initiative by Chandubhai Patel, AAP — Ambheti, Valsad.",
         "lang_name": "English",
 
         # ── Candidate chip (navbar, all pages) ──
@@ -105,6 +106,7 @@ TRANSLATIONS = {
     "hi": {
         # ── App ──
         "app_title": "काम सेतु",
+        "og_description": "अपने गाँव में मज़दूर ढूंढें या काम के लिए नाम लिखवाएं। चंदुभाई पटेल, AAP — अंभेटी, वलसाड की पहल।",
         "lang_name": "हिन्दी",
 
         # ── Candidate chip (navbar, all pages) ──
@@ -202,6 +204,7 @@ TRANSLATIONS = {
     "gu": {
         # ── App ──
         "app_title": "કામ સેતુ",
+        "og_description": "તમારા ગામમાં મજૂર શોધો અથવા કામ માટે નામ લખાવો. ચંદુભાઈ પટેલ, AAP — અંભેટી, વલસાડની પહેલ.",
         "lang_name": "ગુજરાતી",
 
         # ── Candidate chip (navbar, all pages) ──
