@@ -9,24 +9,24 @@
          the app has its own language switcher (gu / hi / en) -->
     <meta name="google" content="notranslate">
 
-    <title>{{ t.app_title }} — {{ t.candidate_name }}</title>
+    <title>{{ t.app_title }}</title>
 
     <!-- Open Graph — WhatsApp / Facebook / Twitter rich preview -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ t.app_title }} — {{ t.candidate_name }}">
+    <meta property="og:title" content="{{ t.app_title }}">
     <meta property="og:description" content="{{ t.og_description }}">
-    <meta property="og:image" content="{{ request.url_root }}static/images/logo.png">
     <meta property="og:locale" content="{{ lang }}">
     <meta name="description" content="{{ t.og_description }}">
 
     <!-- Twitter Card (also used by some apps) -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{ t.app_title }} — {{ t.candidate_name }}">
+    <meta name="twitter:title" content="{{ t.app_title }}">
     <meta name="twitter:description" content="{{ t.og_description }}">
-    <meta name="twitter:image" content="{{ request.url_root }}static/images/logo.png">
 
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}">
+    <!-- Inline favicon: a stylised "K" wordmark on the brand dark background.
+         Explicitly set so browsers stop falling back to the previous candidate
+         photo cached at /favicon.ico. -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a1410'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Plus Jakarta Sans, Segoe UI, sans-serif' font-size='40' font-weight='800' fill='%23e8b774'%3EK%3C/text%3E%3C/svg%3E">
 
     <!-- Google Fonts: Plus Jakarta Sans (Latin) + Hind (Devanagari) + Hind Vadodara (Gujarati) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,20 +49,6 @@
 <body class="notranslate">
     {% block topbar %}
     <header class="top-bar">
-        <div class="brand-group">
-            <img src="{{ url_for('static', filename='images/logo.png') }}?v={{ asset_v }}"
-                 alt="{{ t.candidate_name }}"
-                 class="brand-avatar">
-            <div class="brand-meta">
-                <span class="brand-name">{{ t.candidate_name }}</span>
-                <span class="brand-party">{{ t.candidate_party }}</span>
-                <span class="brand-seat">{{ t.candidate_seat }}</span>
-                <span class="brand-app-inline">{{ t.app_title }}</span>
-            </div>
-        </div>
-
-        <span class="topbar-divider" aria-hidden="true"></span>
-
         <span class="brand-app">{{ t.app_title }}</span>
 
         {% set current_lang = (languages | selectattr('code', 'equalto', lang) | first) %}
@@ -85,58 +71,6 @@
     </header>
     {% endblock %}
 
-    {% block banner %}
-    <div class="appeal-row">
-        <div class="appeal-actions">
-            <button type="button" class="action-btn action-btn-poster"
-                    onclick="document.getElementById('appeal-modal').classList.add('open')">
-                <span class="action-btn-icon" aria-hidden="true">📄</span>
-                <span class="action-btn-text">{{ t.view_poster_label }}</span>
-            </button>
-            <button type="button" class="action-btn action-btn-video"
-                    onclick="var m=document.getElementById('video-modal');m.classList.add('open');var v=document.getElementById('election-video');v.muted=false;v.currentTime=0;document.getElementById('unmute-overlay').classList.add('hidden');v.play().catch(function(){});">
-                <span class="action-btn-icon action-btn-icon-play" aria-hidden="true">▶</span>
-                <span class="action-btn-text">{{ t.watch_video_label }}</span>
-            </button>
-        </div>
-    </div>
-
-    <div id="appeal-modal" class="appeal-modal" onclick="if(event.target===this)this.classList.remove('open')">
-        <div class="appeal-modal-inner">
-            <button type="button" class="appeal-modal-close" aria-label="Close"
-                    onclick="document.getElementById('appeal-modal').classList.remove('open')">&times;</button>
-            <img src="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}"
-                 alt="{{ t.appeal_title }}"
-                 class="appeal-modal-img">
-        </div>
-    </div>
-
-    <div id="video-modal" class="appeal-modal" onclick="if(event.target===this){this.classList.remove('open');document.getElementById('election-video').pause();}">
-        <div class="appeal-modal-inner">
-            <button type="button" class="appeal-modal-close" aria-label="Close"
-                    onclick="document.getElementById('video-modal').classList.remove('open');document.getElementById('election-video').pause();">&times;</button>
-            <div class="video-wrap">
-                <video id="election-video"
-                       class="appeal-modal-video"
-                       controls
-                       playsinline
-                       preload="metadata"
-                       poster="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}">
-                    <source src="{{ url_for('static', filename='videos/election_gujarati.mp4') }}?v={{ asset_v }}" type="video/mp4">
-                </video>
-                <img id="video-splash"
-                     class="video-splash hidden"
-                     src="{{ url_for('static', filename='images/' + banner_poster) }}?v={{ asset_v }}"
-                     alt="{{ t.appeal_title }}">
-                <button type="button" id="unmute-overlay" class="unmute-overlay hidden" aria-label="Tap for sound">
-                    <span class="unmute-overlay-icon" aria-hidden="true">🔊</span>
-                    <span class="unmute-overlay-text">{{ t.tap_for_sound_label }}</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    {% endblock %}
-
     {% block content %}{% endblock %}
 
     <footer class="designer-credit" aria-label="Designer credit">
@@ -147,78 +81,5 @@
         <span class="designer-credit-sep" aria-hidden="true">·</span>
         <a href="https://www.linkedin.com/in/jeetenp03/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </footer>
-
-    <script>
-    (function() {
-        var modal = document.getElementById('video-modal');
-        var video = document.getElementById('election-video');
-        var overlay = document.getElementById('unmute-overlay');
-        var splash = document.getElementById('video-splash');
-        if (!modal || !video || !overlay) return;
-
-        var graceTimer = null;
-        function clearGrace() {
-            if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
-        }
-        function hideSplash() {
-            if (!splash) return;
-            splash.classList.add('fade-out');
-            setTimeout(function() { splash.classList.add('hidden'); }, 500);
-        }
-        function unmute() {
-            video.muted = false;
-            overlay.classList.add('hidden');
-        }
-        overlay.addEventListener('click', function(e) {
-            e.stopPropagation();
-            clearGrace();
-            hideSplash();
-            unmute();
-            video.currentTime = 0;
-            var p = video.play();
-            if (p && p.catch) p.catch(function() {});
-        });
-        video.addEventListener('volumechange', function() {
-            if (!video.muted) overlay.classList.add('hidden');
-        });
-
-        if (sessionStorage.getItem('kaam_setu_video_shown')) return;
-        sessionStorage.setItem('kaam_setu_video_shown', '1');
-        modal.classList.add('open');
-        video.currentTime = 0;
-        video.pause();
-        // Show poster splash for 3s first so the villager sees the
-        // campaign context before the video rolls.
-        if (splash) {
-            splash.classList.remove('hidden', 'fade-out');
-        }
-        overlay.classList.remove('hidden');
-
-        setTimeout(function() {
-            hideSplash();
-            // Try unmuted first (desktop / permissioned browsers).
-            video.muted = false;
-            video.volume = 1;
-            var p = video.play();
-            if (p && p.catch) {
-                p.catch(function() {
-                    // Mobile: muted fallback with 2s tap-for-sound grace.
-                    video.muted = true;
-                    video.pause();
-                    video.currentTime = 0;
-                    graceTimer = setTimeout(function() {
-                        graceTimer = null;
-                        if (video.muted) {
-                            var p2 = video.play();
-                            if (p2 && p2.catch) p2.catch(function() {});
-                        }
-                    }, 2000);
-                });
-            } else {
-                overlay.classList.add('hidden');
-            }
-        }, 3000);
-    })();
-    </script>
 </body>
 </html>

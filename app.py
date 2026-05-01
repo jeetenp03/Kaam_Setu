@@ -111,13 +111,11 @@ def inject_translations():
     lang = session.get("lang", DEFAULT_LANG)
     if lang not in TRANSLATIONS:
         lang = DEFAULT_LANG
-    poster = "Poster (English).jpg" if lang == "en" else "Poster (Gujarati).png"
     return {
         "t": TRANSLATIONS[lang],
         "lang": lang,
         "languages": LANGUAGES,
         "category_images": CATEGORY_IMAGES,
-        "banner_poster": poster,
     }
 
 
